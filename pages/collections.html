@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Коллекции — PHANTOM ONLINE</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Unbounded:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+  <div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawer()"></div>
+  <div class="drawer" id="cart-drawer">
+    <div class="drawer-head"><h3>Корзина</h3><button class="ci-remove" style="font-size:1.4rem" onclick="closeDrawer()">✕</button></div>
+    <div class="drawer-body" id="cart-items"></div>
+    <div class="drawer-foot" id="cart-footer"></div>
+  </div>
+
+  <header class="site-header" id="site-header"></header>
+
+  <section class="page-head">
+    <div class="container">
+      <div class="breadcrumb"><a href="../index.html">Главная</a> / <span>Коллекции</span></div>
+      <h1>Специальные коллекции</h1>
+      <p class="page-desc" id="coll-desc">Скорость, контроль, ловкость, матч-день, тренировки и улица — выберите свою игру.</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:30px">
+    <div class="container">
+      <div class="collection-grid" id="coll-cards" style="max-width:1100px;margin:0 auto 46px"></div>
+      <div class="cards" id="coll-grid"></div>
+      <div class="empty" id="coll-empty" style="display:none"><div class="big">В коллекции пока пусто</div></div>
+    </div>
+  </section>
+
+  <footer class="site-footer" id="site-footer"></footer>
+
+  <script src="../js/data/catalog.js"></script>
+  <script src="../js/ui.js"></script>
+  <script>
+    const GRADS = {
+      speed: 'linear-gradient(150deg,#0ea5e9,#6366f1)',
+      control: 'linear-gradient(150deg,#8b5cf6,#ec4899)',
+      agility: 'linear-gradient(150deg,#f59e0b,#ef4444)',
+      matchday: 'linear-gradient(150deg,#475569,#0f172a)',
+      training: 'linear-gradient(150deg,#10b981,#059669)',
+      street: 'linear-gradient(150deg,#27272a,#18181b)'
+    };
+    document.addEventListener('DOMContentLoaded', () => {
+      const cardsWrap = document.getElementById('coll-cards');
+      const c = new URLSearchParams(location.search).get('c');
+      const active = c || 'speed';
+      cardsWrap.innerHTML = COLLECTIONS.map(col => {
+        const count = Catalog.byCollection(col.key).length;
+        return '<a class="collection-card ' + col.color + '" style="--cc:' + GRADS[col.key] + (col.key===active ? ';outline:3px solid var(--lime);outline-offset:-3px' : '') + '" href="?c=' + col.key + '">' +
+          '<small>' + col.tagline + '</small><h3>' + col.name + '</h3><p>' + col.desc + '</p><span class="go">' + count + ' товар(а) →</span></a>';
+      }).join('');
+
+      const list = Catalog.byCollection(active);
+      const coll = COLLECTIONS.find(x => x.key === active);
+      if (coll) document.getElementById('coll-desc').textContent = coll.name + ' — ' + coll.tagline + '. ' + coll.desc + '.';
+      const grid = document.getElementById('coll-grid');
+      const empty = document.getElementById('coll-empty');
+      empty.style.display = list.length ? 'none' : 'block';
+      grid.innerHTML = list.map(productCard).join('');
+    });
+  </script>
+</body>
+</html>

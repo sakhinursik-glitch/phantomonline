@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Футболки — PHANTOM ONLINE</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Unbounded:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+  <div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawer()"></div>
+  <div class="drawer" id="cart-drawer">
+    <div class="drawer-head"><h3>Корзина</h3><button class="ci-remove" style="font-size:1.4rem" onclick="closeDrawer()">✕</button></div>
+    <div class="drawer-body" id="cart-items"></div>
+    <div class="drawer-foot" id="cart-footer"></div>
+  </div>
+
+  <header class="site-header" id="site-header"></header>
+
+  <section class="page-head">
+    <div class="container">
+      <div class="breadcrumb"><a href="../index.html">Главная</a> / <span>Футболки</span></div>
+      <h1>Игровые футболки</h1>
+      <p class="page-desc">Футболки клубов топ-5 лиг. Выберите клуб, имя и номер — кастомизируйте под себя.</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:24px">
+    <div class="container">
+      <div class="chip-filter" style="margin-bottom:26px" id="jersey-league-bar"></div>
+      <div class="cards" id="jersey-grid"></div>
+      <div class="empty" id="jersey-empty" style="display:none"><div class="big">Футболок пока нет</div></div>
+    </div>
+  </section>
+
+  <!-- CUSTOMIZER CTA -->
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <div class="analogue-banner banner-cta" style="background:linear-gradient(120deg,#ec4899,#8b5cf6 55%,#6366f1)">
+        <h2>Свой игрок. Своя футболка.</h2>
+        <p>Выберите любую футболку из каталога и добавьте имя и номер любимого игрока — или своё собственное.</p>
+        <a class="btn" href="catalog.html?cat=jersey">Выбрать футболку</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer" id="site-footer"></footer>
+
+  <script src="../js/data/catalog.js"></script>
+  <script src="../js/ui.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const all = Catalog.byCategory('jersey');
+      let active = new URLSearchParams(location.search).get('league') || 'all';
+
+      const bar = document.getElementById('jersey-league-bar');
+      const leagues = [{key:'all',name:'Все лиги'}, ...LEAGUES];
+      bar.innerHTML = leagues.map(l => '<span class="chip' + (active === l.key ? ' on' : '') + '" data-l="' + l.key + '" style="cursor:pointer" onclick="setLeague(\'' + l.key + '\')">' + l.name + '</span>').join('');
+
+      window.setLeague = (k) => { active = k; render(); bar.querySelectorAll('.chip').forEach(c => c.classList.toggle('on', c.dataset.l === k)); };
+
+      function render() {
+        let list = active === 'all' ? all : all.filter(p => p.league === active);
+        const clubs = {};
+        list.forEach(p => { clubs[p.club] = clubs[p.club] ? clubs[p.club] + 1 : 1; });
+        const grid = document.getElementById('jersey-grid');
+        const empty = document.getElementById('jersey-empty');
+        if (!list.length) { grid.innerHTML=''; empty.style.display='block'; return; }
+        // group by club into headers
+        grid.innerHTML = list.map(productCard).join('');
+        empty.style.display='none';
+      }
+      render();
+    });
+  </script>
+</body>
+</html>

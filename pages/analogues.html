@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Аналоги — PHANTOM ONLINE</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Unbounded:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+  <div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawer()"></div>
+  <div class="drawer" id="cart-drawer">
+    <div class="drawer-head"><h3>Корзина</h3><button class="ci-remove" style="font-size:1.4rem" onclick="closeDrawer()">✕</button></div>
+    <div class="drawer-body" id="cart-items"></div>
+    <div class="drawer-foot" id="cart-footer"></div>
+  </div>
+
+  <header class="site-header" id="site-header"></header>
+
+  <section class="hero" style="min-height:60vh;align-items:flex-start">
+    <div class="hero-glow"></div>
+    <div class="hero-grid"></div>
+    <div class="container hero-inner" style="padding:80px 0">
+      <span class="hero-tag">· ГЛАВНАЯ ФИШКА PHANTOM ·</span>
+      <h1>АНАЛОГИ —<br><span class="grad">доступная футбольная игра.</span></h1>
+      <p class="hero-sub">Похожие силуэты и игровые характеристики популярных бутс без большого бюджета. Для скорости, контроля, искусственного поля, турфа и индора.</p>
+      <div class="surface-hero">
+        <div class="surface-info"><b>FG</b> для натурального газона</div>
+        <div class="surface-info"><b>AG</b> для искусственного газона</div>
+        <div class="surface-info"><b>TF</b> для турфа / коробок</div>
+        <div class="surface-info"><b>IC</b> для индора</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:20px">
+    <div class="container">
+      <div class="chip-filter" style="margin-bottom:26px" id="analogue-sub-bar"></div>
+      <div class="cards" id="analogue-grid"></div>
+      <div class="empty" id="analogue-empty" style="display:none"><div class="big">Скоро</div></div>
+      <div class="legal-note" style="margin-top:26px;padding:18px;border:1px solid var(--border);border-radius:16px">Аналоги PHANTOM — это доступные альтернативы, вдохновлённые узнаваемыми силуэтами и игровыми характеристиками. Мы не заявляем, что это официальные продукты Nike, adidas или Puma.</div>
+    </div>
+  </section>
+
+  <footer class="site-footer" id="site-footer"></footer>
+
+  <script src="../js/data/catalog.js"></script>
+  <script src="../js/ui.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const all = Catalog.byCategory('analogue');
+      const subs = [...new Set(all.map(p => p.subcategory))];
+      let active = 'all';
+      const bar = document.getElementById('analogue-sub-bar');
+      bar.innerHTML = '<span class="chip' + (active==='all'?' on':'') + '" style="cursor:pointer" onclick="setA(\'all\')">Все</span>' + subs.map(s => '<span class="chip" data-s="' + s + '" style="cursor:pointer" onclick=\'setA("' + s + '")\'>' + s + '</span>').join('');
+
+      window.setA = function(s) { active = s; renderA(); bar.querySelectorAll('.chip').forEach(c => c.classList.toggle('on', active==='all' ? c.dataset.s===undefined : c.dataset.s===s)); };
+      function renderA() {
+        const list = active==='all' ? all : all.filter(p => p.subcategory === active);
+        const grid = document.getElementById('analogue-grid');
+        document.getElementById('analogue-empty').style.display = list.length ? 'none' : 'block';
+        grid.innerHTML = list.map(productCard).join('');
+      }
+      renderA();
+    });
+  </script>
+</body>
+</html>

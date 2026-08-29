@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Лиги — PHANTOM ONLINE</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Unbounded:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+  <div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawer()"></div>
+  <div class="drawer" id="cart-drawer">
+    <div class="drawer-head"><h3>Корзина</h3><button class="ci-remove" style="font-size:1.4rem" onclick="closeDrawer()">✕</button></div>
+    <div class="drawer-body" id="cart-items"></div>
+    <div class="drawer-foot" id="cart-footer"></div>
+  </div>
+
+  <header class="site-header" id="site-header"></header>
+
+  <section class="page-head">
+    <div class="container">
+      <div class="breadcrumb"><a href="../index.html">Главная</a> / <span>Лиги</span></div>
+      <h1>Топ-5 лиг Европы</h1>
+      <p class="page-desc">Premier League, La Liga, Serie A, Bundesliga и Ligue 1. Футболки и экипировка клубов.</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:26px">
+    <div class="container">
+      <div class="league-grid" id="league-grid"></div>
+    </div>
+  </section>
+
+  <footer class="site-footer" id="site-footer"></footer>
+
+  <script src="../js/data/catalog.js"></script>
+  <script src="../js/ui.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const grid = document.getElementById('league-grid');
+      grid.innerHTML = LEAGUES.map(l => {
+        const count = Catalog.getAll().filter(p => p.league === l.key).length;
+        return '<a class="league-card" href="catalog.html?league=' + l.key + '" style="--league-c:linear-gradient(140deg,' + l.color + ',#6366f1)">' +
+          '<div class="league-top"><div class="league-name">' + l.name + '</div><div class="league-country">' + l.country + ' · ' + count + ' товар(а)</div></div>' +
+          '<div class="league-clubs">' + l.clubs.map(c => '<span class="club-chip">' + c + '</span>').join('') + '</div></a>';
+      }).join('');
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Каталог — PHANTOM ONLINE</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Unbounded:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+  <div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawer()"></div>
+  <div class="drawer" id="cart-drawer">
+    <div class="drawer-head"><h3>Корзина</h3><button class="ci-remove" style="font-size:1.4rem" onclick="closeDrawer()">✕</button></div>
+    <div class="drawer-body" id="cart-items"></div>
+    <div class="drawer-foot" id="cart-footer"></div>
+  </div>
+
+  <header class="site-header" id="site-header"></header>
+
+  <section class="page-head">
+    <div class="container">
+      <div class="breadcrumb"><a href="../index.html">Главная</a> / <span>Каталог</span></div>
+      <h1>Каталог</h1>
+      <p class="page-desc">Ищите бутсы, футболки, экипировку. Фильтры по бренду, категории, поверхности, уровню, размеру и цене.</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:24px">
+    <div class="container">
+      <!-- Фильтры -->
+      <div class="filter-bar">
+        <div class="filter-row">
+          <div class="search-wrap">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            <input class="fcontrol" id="f-search" type="search" placeholder="Поиск: Mercurial, Predator, Arsenal, бутсы FG..." oninput="applyFilters()">
+          </div>
+          <div class="filter-group"><label>Категория</label>
+            <select class="fcontrol" id="f-cat" onchange="applyFilters()">
+              <option value="">Все категории</option>
+              <option value="boots">Бутсы</option>
+              <option value="analogue">Аналоги</option>
+              <option value="jersey">Футболки</option>
+              <option value="retro">Ретро</option>
+              <option value="training">Тренировочная</option>
+              <option value="shorts">Шорты</option>
+              <option value="socks">Гетры/носки</option>
+              <option value="gk">Вратарская</option>
+              <option value="balls">Мячи</option>
+              <option value="accessories">Аксессуары</option>
+              <option value="street">Street</option>
+            </select>
+          </div>
+          <div class="filter-group"><label>Бренд</label>
+            <select class="fcontrol" id="f-brand" onchange="applyFilters()"><option value="">Все</option></select>
+          </div>
+          <div class="filter-group"><label>Лига</label>
+            <select class="fcontrol" id="f-league" onchange="applyFilters()"><option value="">Все</option><option value="premier-league">Premier League</option><option value="la-liga">La Liga</option><option value="serie-a">Serie A</option><option value="bundesliga">Bundesliga</option><option value="ligue-1">Ligue 1</option></select>
+          </div>
+          <div class="filter-group"><label>Поверхность</label>
+            <select class="fcontrol" id="f-surface" onchange="applyFilters()"><option value="">Все</option><option value="FG">FG</option><option value="AG">AG</option><option value="TF">TF</option><option value="MG">MG</option><option value="IC">IC</option></select>
+          </div>
+          <div class="filter-group"><label>Уровень</label>
+            <select class="fcontrol" id="f-level" onchange="applyFilters()"><option value="">Все</option><option value="ELITE">ELITE</option><option value="PRO">PRO</option><option value="ACADEMY">ACADEMY</option><option value="ENTRY">ENTRY</option></select>
+          </div>
+          <div class="filter-group"><label>Размер</label>
+            <input class="fcontrol" id="f-size" style="min-width:110px" placeholder="S / 41 / M" oninput="applyFilters()">
+          </div>
+          <div class="filter-group"><label>Макс. цена ₸</label>
+            <input class="fcontrol" id="f-price" type="number" min="0" style="min-width:130px" placeholder="200000" oninput="applyFilters()">
+          </div>
+          <div class="filter-group"><label>Сортировка</label>
+            <select class="fcontrol" id="f-sort" onchange="applyFilters()">
+              <option value="featured">Рекомендуемые</option>
+              <option value="new">Новинки</option>
+              <option value="price-asc">Цена ↑</option>
+              <option value="price-desc">Цена ↓</option>
+              <option value="sale">Со скидкой</option>
+            </select>
+          </div>
+        </div>
+        <div class="chip-filter" id="chip-bar"></div>
+      </div>
+
+      <div class="result-meta"><span>Найдено: <strong id="result-count">0</strong></span><button class="btn btn-ghost" style="padding:8px 14px" onclick="resetFilters()">Сбросить</button></div>
+      <div class="cards" id="catalog-grid"></div>
+      <div class="empty" id="catalog-empty" style="display:none"><div class="big">Ничего не найдено</div><p style="margin-top:8px">Попробуйте изменить запрос или сбросить фильтры</p></div>
+    </div>
+  </section>
+
+  <footer class="site-footer" id="site-footer"></footer>
+
+  <script src="../js/data/catalog.js"></script>
+  <script src="../js/catalog-page.js"></script>
+  <script src="../js/ui.js"></script>
+</body>
+</html>

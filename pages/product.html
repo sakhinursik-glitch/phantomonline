@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Товар — PHANTOM ONLINE</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Unbounded:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+  <div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawer()"></div>
+  <div class="drawer" id="cart-drawer">
+    <div class="drawer-head"><h3>Корзина</h3><button class="ci-remove" style="font-size:1.4rem" onclick="closeDrawer()">✕</button></div>
+    <div class="drawer-body" id="cart-items"></div>
+    <div class="drawer-foot" id="cart-footer"></div>
+  </div>
+
+  <header class="site-header" id="site-header"></header>
+
+  <div style="background:linear-gradient(135deg,rgba(139,92,246,0.12),rgba(34,211,238,0.06))" id="product-hero">
+    <section class="page-head">
+      <div class="container">
+        <div class="breadcrumb" id="product-crumb"></div>
+        <div class="detail-spec-strip" id="product-chips"></div>
+      </div>
+    </section>
+
+    <section class="product-layout">
+      <div class="container" style="display:grid;grid-template-columns:1.05fr 1fr;gap:50px;align-items:start" id="product-layout">
+        <!-- left -->
+        <div>
+          <div class="gallery-main" id="product-gallery"></div>
+          <div class="gallery-thumbs" id="product-thumbs"></div>
+        </div>
+        <!-- right -->
+        <div>
+          <div class="detail-brand" id="product-brand"></div>
+          <h1 class="detail-title" id="product-name"></h1>
+          <div class="detail-price" id="product-price"></div>
+          <div id="product-old"></div>
+          <div class="spec-grid" id="product-specs"></div>
+          <div id="product-customizer"></div>
+          <div class="size-label">Размер</div>
+          <div class="size-options" id="product-sizes"></div>
+          <div class="qty-selector">
+            <span class="opt-label" style="margin:0"><b>Кол-во</b></span>
+            <button class="qty-btn" onclick="changeDetail('qty',-1)">−</button>
+            <span class="qty-val" id="product-qty">1</span>
+            <button class="qty-btn" onclick="changeDetail('qty',1)">+</button>
+          </div>
+          <div class="card-actions" style="grid-template-columns:1fr;padding:18px 0 0">
+            <button class="btn btn-primary btn-lg" onclick="buyNow()">В корзину</button>
+          </div>
+          <div class="detail-desc" id="product-desc"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <section class="section" style="padding-top:30px">
+    <div class="container">
+      <div class="section-head"><h2 class="section-title"><small>YOU MAY ALSO LIKE</small>Похожие товары</h2></div>
+      <div class="cards" id="related"></div>
+    </div>
+  </section>
+
+  <footer class="site-footer" id="site-footer"></footer>
+
+  <script src="../js/data/catalog.js"></script>
+  <script src="../js/product-page.js"></script>
+  <script src="../js/ui.js"></script>
+</body>
+</html>

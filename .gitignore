@@ -1,0 +1,16 @@
+# OS
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+
+# Temporary / cache
+*.log
+node_modules/
+
+# Local overrides (браузерные localStorage не попадают сюда, но защищаемся)
+*.local
