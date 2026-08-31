@@ -129,6 +129,18 @@ const DEFAULT_CATALOG = [
     description: "Создана для дриблинга: эластичная зона на бинтах даёт свободу и контроль. Идеальна для техничных игроков, обыгрывающих один в один.",
     image: "🪄", isNew: true, stock: 11, collection: "agility"
   },
+  {
+    id: "nike-tiempo-legend-10",
+    name: "Nike Tiempo Legend 10 Elite",
+    brand: "Nike",
+    category: "boots", subcategory: "CONTROL BOOTS", productType: "Control boots",
+    price: 25000, sizes: ["EU 39","EU 40","EU 40.5","EU 41","EU 42","EU 42.5","EU 43","EU 44","EU 45"],
+    surface: ["FG","AG"], level: "ELITE", playerProfile: "Control / Passing",
+    material: "Kangaroo FlyTouch", weight: "235 г", fit: "Комфортная",
+    upper: "Кожа Kangaroo FlyTouch с эффектом перчатки", soleplate: "Hyperstability", generation: "2026",
+    description: "Легендарная серия для премьер-классной техники: мягкий кожаный верх с эффектом перчатки даёт идеальный контроль мяча и точность передачи. Выбор плеймейкеров и защитников.",
+    image: "🧤", isNew: true, bestseller: true, stock: 13, collection: "control"
+  },
 
   /* ─────────────────── БУТСЫ · AG СОРОКОНОЖКИ · 24 000 ₸ ─────────────── */
   {

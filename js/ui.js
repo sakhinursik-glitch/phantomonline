@@ -186,7 +186,7 @@ function detectBootModel(p) {
    с ровно этими именами, чтобы они подхватились автоматически. */
 const bootPhotoMap = {
   vapor: 'vapor17.avif', superfly: 'superfly11.avif', f50: 'f50.webp',
-  predator: 'predator26.webp', phantom: 'phantom6.avif', ultra: 'ultra6.jpg', future: 'future9.avif'
+  predator: 'predator26.webp', phantom: 'phantom6.avif', ultra: 'ultra6.jpg', future: 'future9.avif', tiempo: 'tiempo.webp'
 };
 
 function bootPhotoFail(imgEl, model, sf) {

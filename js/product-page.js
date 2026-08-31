@@ -51,6 +51,7 @@ function starBackground(p) {
   else if (name.indexOf('phantom') >= 0) file = 'phantom-bg.jpg';
   else if (name.indexOf('future') >= 0) file = 'future-bg.jpg';
   else if (name.indexOf('ultra') >= 0) file = 'ultra-bg.jpg';
+  else if (name.indexOf('tiempo') >= 0) file = 'tiempo-bg.jpg';
   if (!file) return '';
   return '../assets/img/boots/' + file;
 }
