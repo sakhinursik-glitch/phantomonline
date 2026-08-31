@@ -1,4 +1,4 @@
-/* ============================================================================
+﻿/* ============================================================================
    PHANTOM ONLINE — Глобальный UI: шапка, корзина, карточки, утилиты
    Подключается на всех страницах перед их собственным скриптом.
    ============================================================================ */
@@ -56,9 +56,25 @@ function productArt(p) {
   const accent2 = p.club ? c2 : '#22d3ee';
 
   if (cat === 'jersey' || cat === 'retro') {
-    art = jerseySVG(c1, c2, p.kind === 'long-sleeve', p.club ? p.club : 'PHANTOM', p.season||'');
-  } else if (cat === 'boots' || cat === 'analogue' || cat === 'street' && (p.surface||[]).indexOf('IC')>=0) {
-    art = bootSVG(accent, accent2, p.surface ? p.surface[0] : 'FG');
+    const jfile = p.club ? (jerseyPhotoMap[p.club] || '') : '';
+    if (jfile) {
+      art = '<img loading="lazy" src="' + ROOT + 'assets/img/jerseys/' + jfile + '" alt="' + esc(p.name) + '" ' +
+        'onerror="jerseyPhotoFail(this,\'' + p.id + '\')" ' +
+        'style="width:100%;height:100%;object-fit:cover;display:block">';
+    } else {
+      art = jerseySVG(c1, c2, p.kind === 'long-sleeve', p.club ? p.club : 'PHANTOM', p.season||'');
+    }
+  } else if (cat === 'boots' || cat === 'analogue' || cat === 'street') {
+    const sf = p.surface ? p.surface[0] : 'FG';
+    const model = detectBootModel(p);
+    const pfile = model ? (bootPhotoMap[model] || '') : '';
+    if (pfile) {
+      art = '<img loading="lazy" src="' + ROOT + 'assets/img/boots/' + pfile + '" alt="' + esc(p.name) + '" ' +
+        'onerror="bootPhotoFail(this,\'' + model + '\',\'' + sf + '\')" ' +
+        'style="width:100%;height:100%;object-fit:cover;display:block">';
+    } else {
+      art = model ? bootCoverSVG(model, sf) : bootSVG(accent, accent2, sf);
+    }
   } else if (cat === 'balls') {
     art = ballSVG(accent, accent2);
   } else if (cat === 'gk') {
@@ -69,7 +85,14 @@ function productArt(p) {
     art = shortsSVG(accent, accent2);
   } else if (cat === 'training') {
     const t = (p.productType||'').toLowerCase();
-    if (t.indexOf('hoodie')>=0) art = hoodieSVG(accent, accent2);
+    const tfile = p.club ? (trainingPhotoMap[p.club] || '') : '';
+    if (tfile) {
+      art = '<div style="position:absolute;top:0;left:0;right:0;bottom:0;overflow:hidden">' +
+        '<img loading="lazy" src="' + ROOT + 'assets/img/training/' + tfile + '" alt="' + esc(p.name) + '" ' +
+        'onerror="trainingPhotoFail(this,\'' + p.id + '\')" ' +
+        'style="width:100%;height:135%;object-fit:cover;object-position:center 0%;display:block">' +
+        '</div>';
+    } else if (t.indexOf('hoodie')>=0) art = hoodieSVG(accent, accent2);
     else if (t.indexOf('track')>=0) art = tracksuitSVG(accent, accent2);
     else if (t.indexOf('wind')>=0) art = windbreakerSVG(accent, accent2);
     else if (t.indexOf('pants')>=0) art = pantsSVG(accent, accent2);
@@ -125,11 +148,17 @@ function bootSVG(c1, c2, surface) {
     '<g transform="translate(100,150)">' +
       // подошва
       '<path d="M-36,-14 C-46,-6 -50,6 -50,24 L-18,24 C-18,6 -10,-2 20,-2 C40,-2 50,2 50,24 L50,22 C52,10 44,-12 6,-18 Z" fill="#111"/>' +
-      // шипы
+      // шипы: футзалка (IC) — плоская, сороконожка (AG/MG) — много мелких, иначе обычные
       (surface==='IC' ? '' :
-        '<g fill="#2a2a2a">' +
-        '<rect x="-40" y="18" width="8" height="10" rx="2"/><rect x="-30" y="20" width="8" height="10" rx="2"/><rect x="-20" y="20" width="8" height="10" rx="2"/>' +
-        '<rect x="20" y="18" width="8" height="10" rx="2"/><rect x="30" y="20" width="8" height="10" rx="2"/><rect x="40" y="22" width="8" height="8" rx="2"/></g>') +
+        (surface==='AG' || surface==='MG' ?
+          '<g fill="#2a2a2a">' +
+          '<rect x="-44" y="18" width="6" height="7" rx="1.5"/><rect x="-37" y="20" width="6" height="7" rx="1.5"/><rect x="-30" y="20" width="6" height="7" rx="1.5"/><rect x="-23" y="21" width="6" height="7" rx="1.5"/>' +
+          '<rect x="-16" y="22" width="6" height="7" rx="1.5"/><rect x="-9" y="22" width="6" height="6" rx="1.5"/><rect x="-2" y="22" width="6" height="6" rx="1.5"/>' +
+          '<rect x="16" y="20" width="6" height="7" rx="1.5"/><rect x="23" y="20" width="6" height="7" rx="1.5"/><rect x="30" y="21" width="6" height="7" rx="1.5"/>' +
+          '<rect x="37" y="22" width="6" height="6" rx="1.5"/></g>' :
+          '<g fill="#2a2a2a">' +
+          '<rect x="-40" y="18" width="8" height="10" rx="2"/><rect x="-30" y="20" width="8" height="10" rx="2"/><rect x="-20" y="20" width="8" height="10" rx="2"/>' +
+          '<rect x="20" y="18" width="8" height="10" rx="2"/><rect x="30" y="20" width="8" height="10" rx="2"/><rect x="40" y="22" width="8" height="8" rx="2"/></g>')) +
       // корпус
       '<path d="M-38,-16 C-48,10 -10,24 22,20 C42,17 50,10 48,2 C44,-8 30,-16 10,-20 C-8,-23 -26,-22 -38,-16 Z" fill="' + c1 + '"/>' +
       '<path d="M-38,-16 C-44,-4 -30,6 -8,2 C10,-2 22,-10 20,-18 C14,-26 -24,-26 -38,-16 Z" fill="' + c2 + '" opacity="0.85"/>' +
@@ -138,6 +167,130 @@ function bootSVG(c1, c2, surface) {
       '<circle cx="22" cy="4" r="3" fill="#fff" opacity="0.9"/>' +
       '<path d="M-34,-14 C-30,4 10,16 34,8" stroke="' + c2 + '" stroke-width="2.5" fill="none" opacity="0.9"/>' +
     '</g>');
+}
+
+/* ---------- Обложка бутс по модели ---------- */
+function detectBootModel(p) {
+  const n = (p.name || '').toLowerCase();
+  if (n.indexOf('f50') >= 0) return 'f50';
+  if (n.indexOf('predator') >= 0) return 'predator';
+  if (n.indexOf('phantom') >= 0) return 'phantom';
+  if (n.indexOf('superfly') >= 0) return 'superfly';
+  if (n.indexOf('vapor') >= 0) return 'vapor';
+  if (n.indexOf('ultra') >= 0) return 'ultra';
+  if (n.indexOf('future') >= 0) return 'future';
+  return '';
+}
+
+/* Файл фото для каждой модели. Положи реальные картинки в assets/img/boots/
+   с ровно этими именами, чтобы они подхватились автоматически. */
+const bootPhotoMap = {
+  vapor: 'vapor17.avif', superfly: 'superfly11.avif', f50: 'f50.webp',
+  predator: 'predator26.webp', phantom: 'phantom6.avif', ultra: 'ultra6.jpg', future: 'future9.avif'
+};
+
+function bootPhotoFail(imgEl, model, sf) {
+  if (!imgEl) return;
+  const fb = model ? bootCoverSVG(model, sf) : bootSVG('#a78bfa', '#22d3ee', sf || 'FG');
+  imgEl.outerHTML = fb;
+}
+
+/* Фото форм по клубу. Положи реальные картинки в assets/img/jerseys/
+   с ключами из этой таблицы, чтобы они подхватились автоматически. */
+const jerseyPhotoMap = {
+  'Manchester United': 'manutd.jpeg', 'Liverpool': 'liv.webp', 'Manchester City': 'mancity.webp',
+  'Arsenal': 'arsenal.webp', 'Chelsea': 'chelsea.webp', 'Tottenham Hotspur': 'spurs.webp',
+  'Newcastle United': 'newcastle.webp', 'Aston Villa': 'astonvilla.jpg',
+  'Real Madrid': 'realmadrid.webp', 'Barcelona': 'barcelona.jpeg', 'Atlético Madrid': 'atletico.jpg',
+  'Athletic Club': 'athletic.jpg', 'Real Sociedad': 'realsociedad.webp',
+  'Inter': 'inter.jpg', 'AC Milan': 'amilan.jpeg', 'Juventus': 'juventus.jpg',
+  'Napoli': 'napoli.jpg', 'Roma': 'roma.jpg',
+  'Bayern Munich': 'bayern.jpg', 'Borussia Dortmund': 'dortmund.jpg',
+  'Bayer Leverkusen': 'leverkusen.jpg', 'RB Leipzig': 'rbleipzig.jpg', 'Eintracht Frankfurt': 'frankfurt.jpg',
+  'Paris Saint-Germain': 'psg.jpg', 'Marseille': 'om.jpg', 'Lyon': 'lyon.jpg',
+  'Monaco': 'monaco.jpg', 'Lille': 'lille.webp'
+};
+
+function jerseyPhotoFail(imgEl, id) {
+  if (!imgEl) return;
+  const p = (typeof Catalog !== 'undefined') ? Catalog.getById(id) : null;
+  if (!p) { if (imgEl.parentNode) imgEl.parentNode.removeChild(imgEl); return; }
+  const [x1, x2] = p.club ? clubColor(p.club) : ['#8b5cf6', '#0ea5e9'];
+  imgEl.outerHTML = jerseySVG(x1, x2, p.kind === 'long-sleeve', p.club || 'PHANTOM', p.season || '');
+}
+
+/* Фото тренировочных комплектов по клубу. Положи картинки в assets/img/training/
+   с ключами из этой таблицы, чтобы они подхватились автоматически. */
+const trainingPhotoMap = {
+  'Manchester United': 'manutd.webp', 'Liverpool': 'liv.jpg', 'Manchester City': 'mancity.jpg',
+  'Arsenal': 'arsenal.jpg', 'Chelsea': 'chelsea.jpg', 'Tottenham Hotspur': 'spurs.png',
+  'Real Madrid': 'realmadrid.jpg', 'Barcelona': 'barcelona.jpg', 'Atlético Madrid': 'atletico.jpg',
+  'Inter': 'inter.webp', 'AC Milan': 'amilan.jpg', 'Juventus': 'juventus.jpg',
+  'Napoli': 'napoli.jpeg', 'Bayern Munich': 'bayern.jpg', 'Borussia Dortmund': 'dortmund.webp',
+  'Paris Saint-Germain': 'psg.jpg', 'Marseille': 'om.jpg'
+};
+
+function trainingPhotoFail(imgEl, id) {
+  if (!imgEl) return;
+  const p = (typeof Catalog !== 'undefined') ? Catalog.getById(id) : null;
+  if (!p) { if (imgEl.parentNode) imgEl.parentNode.removeChild(imgEl); return; }
+  const [x1, x2] = p.club ? clubColor(p.club) : ['#8b5cf6', '#0ea5e9'];
+  imgEl.outerHTML = tracksuitSVG(x1, x2);
+}
+
+function bootCoverSVG(model, surface) {
+  const S = {
+    vapor:    { b1:'#b91c1c', b2:'#450a0a', a1:'#fecaca', a2:'#f87171', label:'VAPOR',    sub:'MERCURIAL',  theme:'speed',   t1:'#f87171', t2:'#7f1d1d' },
+    superfly: { b1:'#dc2626', b2:'#7f1d1d', a1:'#fcd34d', a2:'#fbbf24', label:'SUPERFLY', sub:'MERCURIAL',  theme:'speed',   t1:'#fbbf24', t2:'#991b1b' },
+    f50:      { b1:'#65a30d', b2:'#14532d', a1:'#a3e635', a2:'#22d3ee', label:'F50',      sub:'HYPERFAST',  theme:'speed',   t1:'#a3e635', t2:'#052e16' },
+    predator: { b1:'#1f2937', b2:'#0b0f19', a1:'#ff5c8a', a2:'#b91c1c', label:'PREDATOR', sub:'CONTROL',    theme:'control', t1:'#ff5c8a', t2:'#111827' },
+    phantom:  { b1:'#1e3a8a', b2:'#0b1026', a1:'#93c5fd', a2:'#1d4ed8', label:'PHANTOM',  sub:'CONTROL',    theme:'control', t1:'#93c5fd', t2:'#1e3a8a' },
+    ultra:    { b1:'#facc15', b2:'#3f0d0d', a1:'#fde047', a2:'#eab308', label:'ULTRA',    sub:'LIGHTWEIGHT',theme:'speed',   t1:'#fde047', t2:'#422006' },
+    future:   { b1:'#0d9488', b2:'#03312e', a1:'#99f6e4', a2:'#14b8a6', label:'FUTURE',   sub:'AGILITY',    theme:'agile',   t1:'#5eead4', t2:'#042f2e' }
+  };
+  const s = S[model] || { b1:'#6366f1', b2:'#1e1b4b', a1:'#c7d2fe', a2:'#818cf8', label:model.toUpperCase?model.toUpperCase():'BOOT', sub:surface||'FG', theme:'speed', t1:'#c7d2fe', t2:'#1e1b4b' };
+  const surBadge = surface && surface !== 'FG' ? '<rect x="138" y="14" width="48" height="20" rx="10" fill="rgba(255,255,255,0.12)"/><text x="162" y="28" text-anchor="middle" font-family="Arial" font-weight="700" font-size="11" fill="#fff">' + surface + '</text>' : '';
+
+  let motif = '';
+  const tl = 20, ty = 40;
+  if (s.theme === 'speed') {
+    motif =
+      '<g fill="none" stroke-linecap="round">' +
+      '<path d="M8,' + (ty+78) + ' L64,' + (ty+18) + '" stroke="' + s.a2 + '" stroke-width="5" opacity="0.5"/>' +
+      '<path d="M20,' + (ty+96) + ' L96,' + (ty+18) + '" stroke="' + s.a1 + '" stroke-width="4" opacity="0.75"/>' +
+      '<path d="M40,' + (ty+110) + ' L132,' + (ty+18) + '" stroke="' + s.t1 + '" stroke-width="3" opacity="0.6"/>' +
+      '</g>';
+  } else if (s.theme === 'control') {
+    motif =
+      '<g stroke="' + s.a1 + '" stroke-width="1.6" opacity="0.5" fill="none">' +
+      '<circle cx="100" cy="' + (ty+52) + '" r="34"/><circle cx="100" cy="' + (ty+52) + '" r="24"/><circle cx="100" cy="' + (ty+52) + '" r="14"/>' +
+      '<path d="M66,' + (ty+52) + ' L134,' + (ty+52) + ' M100,' + (ty+18) + ' L100,' + (ty+86) + '" opacity="0.6"/>' +
+      '</g>';
+  } else {
+    motif =
+      '<g fill="none" stroke-linecap="round">' +
+      '<path d="M30,' + (ty+96) + ' C60,' + (ty+60) + ' 84,' + (ty+72) + ' 120,' + (ty+26) + '" stroke="' + s.t1 + '" stroke-width="5" opacity="0.6"/>' +
+      '<path d="M50,' + (ty+104) + ' C76,' + (ty+76) + ' 104,' + (ty+80) + ' 140,' + (ty+26) + '" stroke="' + s.a1 + '" stroke-width="4" opacity="0.5"/>' +
+      '</g>';
+  }
+
+  return svgWrap(
+    '<defs>' +
+      '<linearGradient id="covbg" x1="0" y1="0" x2="1" y2="1">' +
+      '<stop offset="0" stop-color="' + s.b1 + '"/><stop offset="1" stop-color="' + s.b2 + '"/>' +
+      '</linearGradient>' +
+    '</defs>' +
+    '<rect width="200" height="200" fill="url(#covbg)"/>' +
+    '<rect width="200" height="200" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="3"/>' +
+    '<rect width="200" height="200" fill="rgba(8,9,15,0.25)"/>' +
+    motif +
+    // корпус бутсы
+    bootSVG(s.a1, s.t1, surface) +
+    // название модели
+    '<text x="100" y="186" text-anchor="middle" font-family="Arial,Helvetica" font-weight="800" font-size="17" fill="#fff" letter-spacing="2">' + s.label + '</text>' +
+    '<text x="100" y="22" text-anchor="middle" font-family="Arial,Helvetica" font-weight="700" font-size="9" fill="rgba(255,255,255,0.75)" letter-spacing="3">' + s.sub + ' · ' + esc(surface || 'FG') + '</text>' +
+    surBadge
+  );
 }
 
 function ballSVG(c1, c2) {
@@ -408,7 +561,7 @@ function renderCart() {
     '<button class="btn btn-primary" style="width:100%" onclick="checkout()">Оформить заказ</button>';
 }
 
-function checkout() { toast('Заказ оформлен (демо)'); setTimeout(() => { localStorage.removeItem('phantom_cart'); saveCart([]); renderCart(); updateCartBadge(); closeDrawer(); }, 700); }
+function checkout() { window.location.href = ROOT + 'pages/checkout.html'; }
 
 /* ---------- Toast ---------- */
 let toastTimer;

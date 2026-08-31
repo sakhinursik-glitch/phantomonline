@@ -39,8 +39,38 @@ function renderSpecs(p) {
   return specs;
 }
 
+function starBackground(p) {
+  // Полноэкранное фоновое фото игрока за бутсами (не блюрим, не обрезаем).
+  // Охватывает FG, AG и IC. Страница живёт в pages/, поэтому путь ../assets/img/.
+  const name = (p.name || '').toLowerCase();
+  let file = '';
+  if (name.indexOf('f50') >= 0) file = 'f50-bg.jpg';
+  else if (name.indexOf('predator') >= 0) file = 'predator-bg.jpg';
+  else if (name.indexOf('superfly') >= 0) file = 'superfly-bg.jpg';
+  else if (name.indexOf('vapor') >= 0) file = 'vapor-bg.jpg';
+  else if (name.indexOf('phantom') >= 0) file = 'phantom-bg.jpg';
+  else if (name.indexOf('future') >= 0) file = 'future-bg.jpg';
+  else if (name.indexOf('ultra') >= 0) file = 'ultra-bg.jpg';
+  if (!file) return '';
+  return '../assets/img/boots/' + file;
+}
+
+function setProductBackdrop(url) {
+  var old = document.getElementById('product-backdrop');
+  if (old) old.remove();
+  if (!url) return;
+  var bd = document.createElement('div');
+  bd.id = 'product-backdrop';
+  bd.innerHTML =
+    '<div class="pb-img" style="background:url(' + url + ') center/contain no-repeat"></div>' +
+    '<div class="pb-shade"></div>';
+  document.body.appendChild(bd);
+}
+
 function renderDetail() {
   const p = currentProduct;
+  const bg = starBackground(p);
+  setProductBackdrop(bg);
   const main = document.getElementById('product-gallery');
   const thumbs = document.getElementById('product-thumbs');
   main.innerHTML = productImgHTML(p);

@@ -3,6 +3,62 @@
    Правки сохраняются в localStorage. Гибкая модель: массив override-объектов.
    ============================================================================ */
 
+/* ---------- Защита админки простым паролем ----------
+   Пароль по умолчанию: phantom2026
+   Чтобы сменить — задай новый пароль в ADMIN_PASS (для локального открытия)
+   и замени ADMIN_HASH новым SHA-256. На опубликованном сайте (https)
+   проверка идёт по хешу, что скрывает пароль из исходника.
+   Это защита от случайных людей, а НЕ от хакеров (статический сайт). */
+const ADMIN_PASS = 'phantom2026';
+const ADMIN_HASH = 'd083e22d890f85c31477435d4e75a7aafed5c1d309b020e3fd7278c479e5f01e'; // sha256('phantom2026')
+const ADMIN_TS = 'phantom_admin_at';
+
+async function sha256(str) {
+  if (window.crypto && crypto.subtle) {
+    const data = new TextEncoder().encode(str);
+    const buf = await crypto.subtle.digest('SHA-256', data);
+    return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+  }
+  return null; // нет WebCrypto (напр. file://) — fallback ниже
+}
+
+async function adminCheck(pass) {
+  const h = await sha256(pass);
+  if (h) return h === ADMIN_HASH;
+  return pass === ADMIN_PASS; // локальный fallback
+}
+
+function adminSession() {
+  const saved = localStorage.getItem(ADMIN_TS) || 0;
+  return (Date.now() - saved) < (12 * 60 * 60 * 1000); // 12 часов
+}
+
+async function adminLogin() {
+  const input = document.getElementById('admin-pass');
+  const err = document.getElementById('admin-err');
+  const pass = input ? input.value : '';
+  if (await adminCheck(pass)) {
+    localStorage.setItem(ADMIN_TS, String(Date.now()));
+    err.textContent = '';
+    showAdminPanel();
+  } else {
+    err.textContent = 'Неверный пароль';
+    if (input) input.value = '';
+  }
+}
+
+function adminLogout() {
+  localStorage.removeItem(ADMIN_TS);
+  document.getElementById('admin-panel').style.display = 'none';
+  document.getElementById('admin-login').style.display = 'block';
+}
+
+function showAdminPanel() {
+  document.getElementById('admin-login').style.display = 'none';
+  document.getElementById('admin-panel').style.display = 'block';
+  showView('list');
+}
+
 let editionId = null;
 
 function getOverrides() { try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); } catch(e) { return []; } }
@@ -152,4 +208,10 @@ function resetAll() {
   showView('list');
 }
 
-document.addEventListener('DOMContentLoaded', () => { showView('list'); });
+document.addEventListener('DOMContentLoaded', () => {
+  if (adminSession()) showAdminPanel();
+  else {
+    document.getElementById('admin-login').style.display = 'block';
+    document.getElementById('admin-panel').style.display = 'none';
+  }
+});

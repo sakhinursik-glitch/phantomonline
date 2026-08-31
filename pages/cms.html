@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
@@ -7,38 +7,56 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Unbounded:wght@500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/styles.css?v=11">
 </head>
 <body>
 
   <header class="site-header" id="site-header"></header>
 
-  <section class="page-head">
-    <div class="container">
-      <div class="breadcrumb"><a href="../index.html">Главная</a> / <span>Админ-панель</span></div>
-      <h1>Управление каталогом (CMS)</h1>
-      <p class="page-desc">Редактируйте товары без правки кода. Изменения сохраняются в localStorage браузера. Список товаров на CMS-панели.</p>
-    </div>
-  </section>
-
-  <section class="section" style="padding-top:24px">
-    <div class="container">
-      <div class="cms-layout">
-        <aside class="cms-side">
-          <a class="on" href="#" onclick="showView('list');return false">Список товаров</a>
-          <a href="#" onclick="showView('add');return false">+ Добавить товар</a>
-          <a href="#" onclick="resetAll();return false" style="color:var(--red)">Сбросить к исходным</a>
-        </aside>
-
-        <div id="cms-view"></div>
+  <!-- ЭКРАН ВХОДА В АДМИНКУ -->
+  <div id="admin-login" class="section" style="padding-top:40px">
+    <div class="container" style="max-width:420px">
+      <div class="notfound" style="background:var(--surface);border:1px solid var(--border);border-radius:24px;padding:46px 34px">
+        <div class="nf" style="font-size:3rem">🔐</div>
+        <h2 style="margin-bottom:8px">Админ-панель</h2>
+        <p style="color:var(--text-dim);margin:0 0 22px">Введите пароль для доступа к управлению каталогом.</p>
+        <input type="password" id="admin-pass" class="fcontrol" style="width:100%;min-width:0;padding:14px 16px;border-radius:14px" placeholder="Пароль" onkeydown="if(event.key==='Enter')adminLogin()">
+        <div id="admin-err" style="color:var(--red);font-size:.85rem;margin-top:8px;min-height:1em"></div>
+        <button class="btn btn-primary" style="width:100%;margin-top:10px" onclick="adminLogin()">Войти</button>
       </div>
     </div>
+  </div>
+
+  <!-- САМА ПАНЕЛЬ -->
+  <section id="admin-panel" style="display:none">
+    <section class="page-head">
+      <div class="container">
+        <div class="breadcrumb"><a href="../index.html">Главная</a> / <span>Админ-панель</span></div>
+        <h1>Управление каталогом (CMS)</h1>
+        <p class="page-desc">Редактируйте товары без правки кода. Изменения сохраняются в localStorage браузера. Список товаров на CMS-панели.</p>
+        <button class="btn btn-ghost" style="margin-top:12px;font-size:.85rem" onclick="adminLogout()">Выйти из админки</button>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:24px">
+      <div class="container">
+        <div class="cms-layout">
+          <aside class="cms-side">
+            <a class="on" href="#" onclick="showView('list');return false">Список товаров</a>
+            <a href="#" onclick="showView('add');return false">+ Добавить товар</a>
+            <a href="#" onclick="resetAll();return false" style="color:var(--red)">Сбросить к исходным</a>
+          </aside>
+
+          <div id="cms-view"></div>
+        </div>
+      </div>
+    </section>
   </section>
 
   <footer class="site-footer" id="site-footer"></footer>
 
   <script src="../js/data/catalog.js"></script>
-  <script src="../js/ui.js"></script>
+  <script src="../js/ui.js?v=11"></script>
   <script src="../js/cms-page.js"></script>
 </body>
 </html>
