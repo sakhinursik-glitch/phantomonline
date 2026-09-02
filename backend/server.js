@@ -13,6 +13,15 @@ const cartRoutes = require('./src/routes/cart');
 const orderRoutes = require('./src/routes/orders');
 const adminRoutes = require('./src/routes/admin');
 
+// Auto-initialize database (migrate + seed) on startup
+try {
+  require('./src/migrations/001_init');
+  require('./src/migrations/002_seed');
+  console.log('[PHANTOM] Database auto-initialized');
+} catch (err) {
+  console.error('[PHANTOM] DB init failed:', err && err.message);
+}
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 

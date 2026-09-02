@@ -11,7 +11,9 @@
 (function () {
   'use strict';
 
-  const API = (typeof PHANTOM_API_URL !== 'undefined' ? PHANTOM_API_URL : 'http://localhost:3000/api');
+  const API = (typeof PHANTOM_API_URL !== 'undefined' && PHANTOM_API_URL)
+    ? PHANTOM_API_URL.replace(/\/+$/, '')
+    : (typeof location !== 'undefined' ? location.origin + '/api' : '');
   let authToken = localStorage.getItem('phantom_auth_token') || null;
   let currentUser = null;
   let apiAvailable = false;
@@ -178,6 +180,9 @@
         return;
       } catch (e) {
         console.error('API order failed, falling back to Formspree:', e);
+        submitting = false;
+        const btnR = document.querySelector('#checkout-form button[type="submit"]');
+        if (btnR) btnR.disabled = false;
       }
     }
 
@@ -315,6 +320,14 @@
         window.changeQty = function (i, d) {
           if (authToken) apiChangeQty(i, d);
           else origChangeQty(i, d);
+        };
+      }
+
+      if (typeof window.placeOrder !== 'undefined') {
+        const origPlaceOrder = window.placeOrder;
+        window.placeOrder = function () {
+          if (authToken) apiPlaceOrder();
+          else origPlaceOrder();
         };
       }
     }
