@@ -3,10 +3,10 @@ const ProductModel = require('../models/product');
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const { search, category, brand, league, surface, level, size, minPrice, maxPrice, sort, isNew, bestseller, featured, sale, collection, page, limit } = req.query;
-    const result = ProductModel.getAll({ search, category, brand, league, surface, level, size, minPrice, maxPrice, sort, isNew, bestseller, featured, sale, collection, page, limit });
+    const result = await ProductModel.getAll({ search, category, brand, league, surface, level, size, minPrice, maxPrice, sort, isNew, bestseller, featured, sale, collection, page, limit });
     res.json(result);
   } catch (err) {
     console.error('Catalog error:', err);
@@ -14,25 +14,27 @@ router.get('/', (req, res) => {
   }
 });
 
-router.get('/categories', (req, res) => {
+router.get('/categories', async (req, res) => {
   try {
-    res.json(ProductModel.categories());
+    const cats = await ProductModel.categories();
+    res.json(cats);
   } catch (err) {
     res.status(500).json({ error: 'Ошибка получения категорий' });
   }
 });
 
-router.get('/brands', (req, res) => {
+router.get('/brands', async (req, res) => {
   try {
-    res.json(ProductModel.brands());
+    const brands = await ProductModel.brands();
+    res.json(brands);
   } catch (err) {
     res.status(500).json({ error: 'Ошибка получения брендов' });
   }
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id', async (req, res) => {
   try {
-    const product = ProductModel.findById(req.params.id);
+    const product = await ProductModel.findById(req.params.id);
     if (!product) return res.status(404).json({ error: 'Товар не найден' });
     res.json({ product });
   } catch (err) {

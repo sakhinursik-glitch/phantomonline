@@ -1,29 +1,35 @@
-const db = require('../config/db');
+const { query, queryRow } = require('../config/db');
 
 const UserModel = {
-  create({ name, email, passwordHash, role = 'user' }) {
-    return db.prepare(
-      'INSERT INTO users (name, email, password_hash, role) VALUES (?, ?, ?, ?)'
-    ).run(name, email, passwordHash, role);
+  async create({ name, email, passwordHash, role = 'user' }) {
+    await query(
+      'INSERT INTO users (name, email, password_hash, role) VALUES ($1, $2, $3, $4)',
+      [name, email, passwordHash, role]
+    );
+    return this.findByEmail(email);
   },
 
-  findByEmail(email) {
-    return db.prepare('SELECT * FROM users WHERE email = ?').get(email);
+  async findByEmail(email) {
+    return queryRow('SELECT * FROM users WHERE email = $1', [email]);
   },
 
-  findById(id) {
-    return db.prepare('SELECT id, name, email, role, created_at FROM users WHERE id = ?').get(id);
+  async findById(id) {
+    return queryRow(
+      'SELECT id, name, email, role, created_at FROM users WHERE id = $1',
+      [id]
+    );
   },
 
-  updateProfile(id, { name, email }) {
-    return db.prepare('UPDATE users SET name = COALESCE(?, name), email = COALESCE(?, email) WHERE id = ?')
-      .run(name || null, email || null, id);
+  async updateProfile(id, { name, email }) {
+    await query(
+      'UPDATE users SET name = COALESCE($1, name), email = COALESCE($2, email) WHERE id = $3',
+      [name || null, email || null, id]
+    );
+    return this.findById(id);
   },
 
-  orderHistory(userId) {
-    return db.prepare(
-      'SELECT * FROM orders WHERE user_id = ? ORDER BY created_at DESC'
-    ).all(userId);
+  async orderHistory(userId) {
+    return query('SELECT * FROM orders WHERE user_id = $1 ORDER BY created_at DESC', [userId]).then(r => r.rows);
   },
 };
 

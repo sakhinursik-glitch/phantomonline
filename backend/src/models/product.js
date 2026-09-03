@@ -1,36 +1,41 @@
-const db = require('../config/db');
+const { query, queryRow, queryAll, execute } = require('../config/db');
 
 const ProductModel = {
-  findById(id) {
-    const row = db.prepare('SELECT * FROM products WHERE id = ?').get(id);
+  async findById(id) {
+    const row = await queryRow('SELECT * FROM products WHERE id = $1', [id]);
     return row ? ProductModel._parse(row) : null;
   },
 
-  getAll({ search, category, brand, league, surface, level, size, minPrice, maxPrice, sort, isNew, bestseller, featured, sale, collection, page = 1, limit = 50 } = {}) {
+  async getAll({ search, category, brand, league, surface, level, size, minPrice, maxPrice, sort, isNew, bestseller, featured, sale, collection, page = 1, limit = 50 } = {}) {
     let sql = 'SELECT * FROM products WHERE 1=1';
     const params = [];
+    let n = 0;
+
+    const p = () => `$${++n}`;
 
     if (search) {
       const tokens = search.toLowerCase().split(/\s+/).filter(Boolean);
       for (const t of tokens) {
-        sql += ' AND (LOWER(name) LIKE ? OR LOWER(brand) LIKE ? OR LOWER(category) LIKE ? OR LOWER(subcategory) LIKE ? OR LOWER(product_type) LIKE ? OR LOWER(description) LIKE ? OR LOWER(club) LIKE ? OR LOWER(level) LIKE ?)';
+        const cols = ['name', 'brand', 'category', 'subcategory', 'product_type', 'description', 'club', 'level'];
         const like = `%${t}%`;
-        params.push(like, like, like, like, like, like, like, like);
+        const parts = cols.map(c => `LOWER(${c}) LIKE ${p()}`);
+        for (let i = 0; i < cols.length; i++) params.push(like);
+        sql += ` AND (${parts.join(' OR ')})`;
       }
     }
-    if (category) { sql += ' AND category = ?'; params.push(category); }
-    if (brand) { sql += ' AND brand = ?'; params.push(brand); }
-    if (league) { sql += ' AND league = ?'; params.push(league); }
-    if (surface) { sql += ' AND surface LIKE ?'; params.push(`%"${surface}"%`); }
-    if (level) { sql += ' AND level = ?'; params.push(level); }
-    if (size) { sql += ' AND sizes LIKE ?'; params.push(`%${size}%`); }
-    if (minPrice) { sql += ' AND price >= ?'; params.push(Number(minPrice)); }
-    if (maxPrice) { sql += ' AND price <= ?'; params.push(Number(maxPrice)); }
+    if (category) { sql += ` AND category = ${p()}`; params.push(category); }
+    if (brand) { sql += ` AND brand = ${p()}`; params.push(brand); }
+    if (league) { sql += ` AND league = ${p()}`; params.push(league); }
+    if (surface) { sql += ` AND surface LIKE ${p()}`; params.push(`%"${surface}"%`); }
+    if (level) { sql += ` AND level = ${p()}`; params.push(level); }
+    if (size) { sql += ` AND sizes LIKE ${p()}`; params.push(`%${size}%`); }
+    if (minPrice !== undefined && minPrice !== null && minPrice !== '') { sql += ` AND price >= ${p()}`; params.push(Number(minPrice)); }
+    if (maxPrice !== undefined && maxPrice !== null && maxPrice !== '') { sql += ` AND price <= ${p()}`; params.push(Number(maxPrice)); }
     if (isNew === '1' || isNew === true) { sql += ' AND is_new = 1'; }
     if (bestseller === '1' || bestseller === true) { sql += ' AND bestseller = 1'; }
     if (featured === '1' || featured === true) { sql += ' AND featured = 1'; }
     if (sale === '1' || sale === true) { sql += ' AND sale = 1'; }
-    if (collection) { sql += ' AND collection = ?'; params.push(collection); }
+    if (collection) { sql += ` AND collection = ${p()}`; params.push(collection); }
 
     const sortMap = {
       'new': 'is_new DESC, created_at DESC',
@@ -42,79 +47,70 @@ const ProductModel = {
     };
     sql += ' ORDER BY ' + (sortMap[sort] || sortMap['featured']);
 
-    // Count before pagination
     const countSql = sql.replace('SELECT *', 'SELECT COUNT(*) as total');
-    const total = db.prepare(countSql).get(...params).total;
+    const countRes = await query(countSql, params);
+    const total = Number(countRes.rows[0].total);
 
     const offset = (Math.max(1, Number(page)) - 1) * Number(limit);
-    sql += ` LIMIT ? OFFSET ?`;
+    sql += ` LIMIT ${p()} OFFSET ${p()}`;
     params.push(Number(limit), offset);
 
-    const rows = db.prepare(sql).all(...params);
+    const rows = await queryAll(sql, params);
     return { items: rows.map(ProductModel._parse), total, page: Number(page), limit: Number(limit) };
   },
 
-  categories() {
-    return db.prepare('SELECT DISTINCT category, COUNT(*) as count FROM products GROUP BY category ORDER BY count DESC').all();
+  async categories() {
+    const rows = await queryAll(
+      'SELECT category, COUNT(*) as count FROM products GROUP BY category ORDER BY count DESC'
+    );
+    return rows;
   },
 
-  brands() {
-    return db.prepare('SELECT brand, COUNT(*) as count FROM products WHERE brand IS NOT NULL GROUP BY brand ORDER BY brand').all();
+  async brands() {
+    const rows = await queryAll(
+      'SELECT brand, COUNT(*) as count FROM products WHERE brand IS NOT NULL GROUP BY brand ORDER BY brand'
+    );
+    return rows;
   },
 
-  create(data) {
-    return db.prepare(`INSERT INTO products (
-      id, name, description, price, old_price, discount, image,
-      category, brand, subcategory, product_type, league, club, season, kind,
-      sizes, surface, level, player_profile, material, weight, fit,
-      upper, soleplate, generation, purpose, grip,
-      featured, bestseller, is_new, sale, stock, collection
-    ) VALUES (
-      @id, @name, @description, @price, @old_price, @discount, @image,
-      @category, @brand, @subcategory, @product_type, @league, @club, @season, @kind,
-      @sizes, @surface, @level, @player_profile, @material, @weight, @fit,
-      @upper, @soleplate, @generation, @purpose, @grip,
-      @featured, @bestseller, @is_new, @sale, @stock, @collection
-    )`).run({
-      id: data.id,
-      name: data.name || '',
-      description: data.description || null,
-      price: data.price || 0,
-      old_price: data.oldPrice || null,
-      discount: data.discount || null,
-      image: data.image || null,
-      category: data.category || 'boots',
-      brand: data.brand || null,
-      subcategory: data.subcategory || null,
-      product_type: data.productType || null,
-      league: data.league || null,
-      club: data.club || null,
-      season: data.season || null,
-      kind: data.kind || null,
-      sizes: JSON.stringify(data.sizes || []),
-      surface: JSON.stringify(data.surface || []),
-      level: data.level || null,
-      player_profile: data.playerProfile || null,
-      material: data.material || null,
-      weight: data.weight || null,
-      fit: data.fit || null,
-      upper: data.upper || null,
-      soleplate: data.soleplate || null,
-      generation: data.generation || null,
-      purpose: data.purpose || null,
-      grip: data.grip || null,
-      featured: data.featured ? 1 : 0,
-      bestseller: data.bestseller ? 1 : 0,
-      is_new: data.isNew ? 1 : 0,
-      sale: data.sale ? 1 : 0,
-      stock: data.stock || 0,
-      collection: data.collection || null,
-    });
+  async create(data) {
+    await query(
+      `INSERT INTO products (
+        id, name, description, price, old_price, discount, image,
+        category, brand, subcategory, product_type, league, club, season, kind,
+        sizes, surface, level, player_profile, material, weight, fit,
+        upper, soleplate, generation, purpose, grip,
+        featured, bestseller, is_new, sale, stock, collection
+      ) VALUES (
+        $1, $2, $3, $4, $5, $6, $7,
+        $8, $9, $10, $11, $12, $13, $14, $15,
+        $16, $17, $18, $19, $20, $21, $22,
+        $23, $24, $25, $26, $27,
+        $28, $29, $30, $31, $32, $33
+      )`,
+      [
+        data.id, data.name || '', data.description || null, data.price || 0,
+        data.oldPrice || null, data.discount || null, data.image || null,
+        data.category || 'boots', data.brand || null, data.subcategory || null,
+        data.productType || null, data.league || null, data.club || null,
+        data.season || null, data.kind || null,
+        JSON.stringify(data.sizes || []), JSON.stringify(data.surface || []),
+        data.level || null, data.playerProfile || null, data.material || null,
+        data.weight || null, data.fit || null,
+        data.upper || null, data.soleplate || null, data.generation || null,
+        data.purpose || null, data.grip || null,
+        data.featured ? 1 : 0, data.bestseller ? 1 : 0, data.isNew ? 1 : 0,
+        data.sale ? 1 : 0, data.stock || 0, data.collection || null,
+      ]
+    );
+    return { rowCount: 1, lastID: data.id };
   },
 
-  update(id, data) {
+  async update(id, data) {
     const fields = [];
     const params = [];
+    let n = 0;
+    const p = () => `$${++n}`;
     const map = {
       name: 'name', description: 'description', price: 'price', oldPrice: 'old_price',
       discount: 'discount', image: 'image', category: 'category', brand: 'brand',
@@ -129,31 +125,31 @@ const ProductModel = {
 
     for (const [jsKey, dbCol] of Object.entries(map)) {
       if (data[jsKey] !== undefined) {
-        fields.push(`${dbCol} = ?`);
+        fields.push(`${dbCol} = ${p()}`);
         params.push(data[jsKey]);
       }
     }
     for (const [jsKey, dbCol] of Object.entries(boolMap)) {
       if (data[jsKey] !== undefined) {
-        fields.push(`${dbCol} = ?`);
+        fields.push(`${dbCol} = ${p()}`);
         params.push(data[jsKey] ? 1 : 0);
       }
     }
     for (const [jsKey, dbCol] of Object.entries(arrMap)) {
       if (data[jsKey] !== undefined) {
-        fields.push(`${dbCol} = ?`);
+        fields.push(`${dbCol} = ${p()}`);
         params.push(JSON.stringify(data[jsKey]));
       }
     }
 
     if (!fields.length) return null;
-    fields.push("updated_at = datetime('now')");
+    fields.push('updated_at = CURRENT_TIMESTAMP');
     params.push(id);
-    return db.prepare(`UPDATE products SET ${fields.join(', ')} WHERE id = ?`).run(...params);
+    return execute(`UPDATE products SET ${fields.join(', ')} WHERE id = ${p()}`, params);
   },
 
-  remove(id) {
-    return db.prepare('DELETE FROM products WHERE id = ?').run(id);
+  async remove(id) {
+    return execute('DELETE FROM products WHERE id = $1', [id]);
   },
 
   _parse(row) {

@@ -13,15 +13,6 @@ const cartRoutes = require('./src/routes/cart');
 const orderRoutes = require('./src/routes/orders');
 const adminRoutes = require('./src/routes/admin');
 
-// Auto-initialize database (migrate + seed) on startup
-try {
-  require('./src/migrations/001_init');
-  require('./src/migrations/002_seed');
-  console.log('[PHANTOM] Database auto-initialized');
-} catch (err) {
-  console.error('[PHANTOM] DB init failed:', err && err.message);
-}
-
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -42,7 +33,7 @@ app.use(globalLimiter);
 
 // Health check
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok', timestamp: new Date().toISOString(), version: '1.0.0' });
+  res.json({ status: 'ok', timestamp: new Date().toISOString(), version: '2.0.0' });
 });
 
 // API Routes
@@ -70,10 +61,25 @@ app.get('/pages/*', (req, res) => {
 // Error handler
 app.use(errorHandler);
 
-app.listen(PORT, () => {
-  console.log(`[PHANTOM] Backend running on port ${PORT}`);
-  console.log(`[PHANTOM] API: http://localhost:${PORT}/api`);
-  console.log(`[PHANTOM] Health: http://localhost:${PORT}/api/health`);
-});
+// Auto-initialize database (migrate + seed) then start server
+async function start() {
+  try {
+    const migrate = require('./src/migrations/001_init');
+    await migrate();
+    const seed = require('./src/migrations/002_seed');
+    await seed();
+    console.log('[PHANTOM] Database auto-initialized (Postgres/Neon)');
+  } catch (err) {
+    console.error('[PHANTOM] DB init failed:', err && err.message);
+  }
+
+  app.listen(PORT, () => {
+    console.log(`[PHANTOM] Backend running on port ${PORT}`);
+    console.log(`[PHANTOM] API: http://localhost:${PORT}/api`);
+    console.log(`[PHANTOM] Health: http://localhost:${PORT}/api/health`);
+  });
+}
+
+start();
 
 module.exports = app;

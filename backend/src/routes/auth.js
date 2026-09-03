@@ -16,13 +16,13 @@ router.post('/register', authLimiter, validate([
 ]), async (req, res) => {
   try {
     const { name, email, password } = req.body;
-    const existing = UserModel.findByEmail(email);
+    const existing = await UserModel.findByEmail(email);
     if (existing) {
       return res.status(409).json({ error: 'Пользователь с таким email уже существует' });
     }
     const hash = await bcrypt.hash(password, 12);
-    UserModel.create({ name, email, passwordHash: hash });
-    const user = UserModel.findByEmail(email);
+    await UserModel.create({ name, email, passwordHash: hash });
+    const user = await UserModel.findByEmail(email);
     const token = jwt.sign({ id: user.id, role: user.role, name: user.name, email: user.email }, jwtSecret, { expiresIn: jwtExpiresIn });
     res.status(201).json({ token, user: { id: user.id, name: user.name, email: user.email, role: user.role } });
   } catch (err) {
@@ -37,7 +37,7 @@ router.post('/login', authLimiter, validate([
 ]), async (req, res) => {
   try {
     const { email, password } = req.body;
-    const user = UserModel.findByEmail(email);
+    const user = await UserModel.findByEmail(email);
     if (!user) {
       return res.status(401).json({ error: 'Неверный email или пароль' });
     }
@@ -57,8 +57,8 @@ router.post('/login', authLimiter, validate([
   }
 });
 
-router.get('/me', authenticate, (req, res) => {
-  const user = UserModel.findById(req.user.id);
+router.get('/me', authenticate, async (req, res) => {
+  const user = await UserModel.findById(req.user.id);
   if (!user) return res.status(404).json({ error: 'Пользователь не найден' });
   res.json({ user });
 });
@@ -66,13 +66,13 @@ router.get('/me', authenticate, (req, res) => {
 router.put('/me', authenticate, validate([
   { name: 'name', required: false, minLength: 2 },
   { name: 'email', required: false, type: 'email' },
-]), (req, res) => {
+]), async (req, res) => {
   try {
-    UserModel.updateProfile(req.user.id, req.body);
-    const user = UserModel.findById(req.user.id);
+    await UserModel.updateProfile(req.user.id, req.body);
+    const user = await UserModel.findById(req.user.id);
     res.json({ user });
   } catch (err) {
-    if (err.message && err.message.includes('UNIQUE')) {
+    if (err.message && err.message.includes('unique')) {
       return res.status(409).json({ error: 'Email уже используется' });
     }
     res.status(500).json({ error: 'Ошибка обновления профиля' });

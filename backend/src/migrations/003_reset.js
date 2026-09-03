@@ -1,14 +1,21 @@
 require('dotenv').config();
-const fs = require('fs');
-const path = require('path');
+const { query, rawExec, dialect } = require('../config/db');
 
-const dbPath = path.resolve(process.env.DB_PATH || './data/phantom.db');
-if (fs.existsSync(dbPath)) {
-  fs.unlinkSync(dbPath);
-  console.log('[RESET] Database deleted:', dbPath);
+async function reset() {
+  if (dialect === 'sqlite') {
+    rawExec(`
+      DELETE FROM order_items;
+      DELETE FROM orders;
+      DELETE FROM cart_items;
+      DELETE FROM products;
+      DELETE FROM users;
+    `);
+  } else {
+    await query('TRUNCATE users, products, cart_items, orders, order_items RESTART IDENTITY CASCADE');
+  }
+  console.log(`[RESET] All tables truncated (${dialect})`);
+  console.log('[RESET] Done. Run: npm run setup');
 }
-const walPath = dbPath + '-wal';
-const shmPath = dbPath + '-shm';
-if (fs.existsSync(walPath)) fs.unlinkSync(walPath);
-if (fs.existsSync(shmPath)) fs.unlinkSync(shmPath);
-console.log('[RESET] Done. Run: npm run setup');
+
+module.exports = reset;
+if (require.main === module) reset().catch(e => { console.error(e); process.exit(1); });
