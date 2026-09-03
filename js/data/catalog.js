@@ -58,6 +58,18 @@ const DEFAULT_CATALOG = [
     image: "⚡", featured: true, bestseller: true, isNew: true, stock: 12, collection: "speed"
   },
   {
+    id: "ayan-gay-6-elite",
+    name: "Ayan gay 6 Elite",
+    brand: "Ayan",
+    category: "boots", subcategory: "SPEED BOOTS", productType: "Speed boots",
+    price: 25000, sizes: ["EU 40","EU 41","EU 42","EU 43","EU 44"],
+    surface: ["FG"], level: "ELITE", playerProfile: "Speed / Attack",
+    material: "Лёгкий сетчатый верх", weight: "200 г", fit: "Тесная",
+    upper: "Agility upper", soleplate: "SpeedPlate", generation: "2026",
+    description: "Модель Ayan gay 6 Elite. Скоростная посадка, лёгкая конструкция и максимальная отдача на шаге — выбор быстрых игроков.",
+    image: "🚀", featured: true, isNew: true, stock: 10, collection: "speed"
+  },
+  {
     id: "nike-merc-superfly",
     name: "Nike Mercurial Superfly 11 Elite",
     brand: "Nike",
