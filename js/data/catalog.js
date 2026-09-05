@@ -106,6 +106,18 @@ const DEFAULT_CATALOG = [
     image: "🎯", featured: true, bestseller: true, isNew: true, stock: 9, collection: "control"
   },
   {
+    id: "nike-phantom-gx2",
+    name: "Nike Phantom GX 2 Elite",
+    brand: "Nike",
+    category: "boots", subcategory: "CONTROL BOOTS", productType: "Control boots",
+    price: 25000, sizes: ["EU 39","EU 40","EU 41","EU 42","EU 43","EU 44","EU 45"],
+    surface: ["FG","AG"], level: "ELITE", playerProfile: "Control / Passing / Finishing",
+    material: "GripknitPro", weight: "230 г", fit: "Комфортная",
+    upper: "GripknitPro сухое сцепление", soleplate: "Nike GX 2", generation: "2026",
+    description: "Новое поколение плеймейкерских бутс Phantom. Рискованные пасы и выверенный приём даже на мокром газоне — зона контакта выросла, сцепление стало ещё надёжнее.",
+    image: "✨", featured: true, isNew: true, stock: 11, collection: "control"
+  },
+  {
     id: "adidas-predator",
     name: "adidas Predator 26 Elite",
     brand: "adidas",
