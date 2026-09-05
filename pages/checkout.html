@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
@@ -10,16 +10,13 @@
   <link rel="stylesheet" href="../css/styles.css?v=12">
 </head>
 <body>
-
   <div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawer()"></div>
   <div class="drawer" id="cart-drawer">
     <div class="drawer-head"><h3>Корзина</h3><button class="ci-remove" style="font-size:1.4rem" onclick="closeDrawer()">✕</button></div>
     <div class="drawer-body" id="cart-items"></div>
     <div class="drawer-foot" id="cart-footer"></div>
   </div>
-
   <header class="site-header" id="site-header"></header>
-
   <!-- Успешное оформление -->
   <section class="page-head" id="checkout-success" style="display:none">
     <div class="container">
@@ -29,31 +26,26 @@
         <p>Спасибо! Мы приняли ваш заказ <b>№ <span id="su-order"></span></b> на сумму <b id="su-total"></b>.</p>
         <p>Оплата картой <b id="su-card"></b>, держатель <b id="su-holder"></b>.<br>Переведите сумму и ожидайте звонка менеджера для подтверждения.</p>
         <p id="su-wa"></p>
-        <a class="btn btn-primary btn-lg" href="../index.html">На главную</a>
+        <a class='btn btn-primary btn-lg' href='/'>На главную</a>
       </div>
     </div>
   </section>
-
   <section class="page-head" id="checkout-head">
     <div class="container">
-      <div class="breadcrumb"><a href="../index.html">Главная</a> / <a href="../pages/catalog.html">Каталог</a> / <span>Оформление заказа</span></div>
+      <div class="breadcrumb"><a href='/'>Главная</a> / <a href='/pages/catalog'>Каталог</a> / <span>Оформление заказа</span></div>
       <h1>Оформление заказа</h1>
       <p class="page-desc">Заполните контакты, выберите способ доставки и оплаты.</p>
     </div>
   </section>
-
   <section class="section" id="checkout-section" style="padding-top:20px">
     <div class="container">
-
       <div class="empty" id="checkout-empty" style="display:none">
         <div class="big">Корзина пуста</div>
         <p>Добавьте товары из каталога, чтобы оформить заказ.</p>
-        <a class="btn btn-primary" href="../pages/catalog.html" style="margin-top:18px">Перейти в каталог</a>
+        <a class='btn btn-primary' href='/pages/catalog' style='margin-top:18px'>Перейти в каталог</a>
       </div>
-
       <div class="checkout" id="checkout-wrap">
         <form class="co-form" id="checkout-form" onsubmit="event.preventDefault(); placeOrder();">
-
           <section class="co-card">
             <div class="co-card-head"><span class="co-step">1</span><h2>Контакты</h2></div>
             <div class="co-form-grid">
@@ -71,7 +63,6 @@
               </div>
             </div>
           </section>
-
           <section class="co-card">
             <div class="co-card-head"><span class="co-step">2</span><h2>Доставка</h2></div>
             <div class="co-delivery" id="co-delivery-list"></div>
@@ -90,29 +81,21 @@
               </div>
             </div>
           </section>
-
           <section class="co-card">
             <div class="co-card-head"><span class="co-step">3</span><h2>Оплата картой</h2></div>
             <p class="co-pay-intro">Оплата производится переводом на карту продавца. После подтверждения заказа свяжитесь с нами для уточнения деталей.</p>
             <div id="co-card-req"></div>
           </section>
-
           <button type="submit" class="btn btn-primary btn-lg" style="width:100%;margin-top:8px">Подтвердить заказ</button>
           <p class="co-legal">Нажимая «Подтвердить заказ», вы соглашаетесь с условиями обработки заказа. Мы не храним данные вашей карты.</p>
         </form>
-
         <aside class="co-summary" id="co-summary"></aside>
       </div>
-
     </div>
   </section>
-
   <footer class="site-footer" id="site-footer"></footer>
-
   <script src="../js/data/catalog.js"></script>
   <script src="../js/ui.js?v=12"></script>
   <script src="../js/checkout.js?v=12"></script>
-  <script>window.PHANTOM_API_URL = window.PHANTOM_API_URL || 'https://phantom-online-api.onrender.com/api';</script>
-  <script src="../js/api-adapter.js"></script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
@@ -11,21 +11,17 @@
   <link rel="stylesheet" href="css/styles.css?v=12">
 </head>
 <body>
-
   <div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawer()"></div>
   <div class="drawer" id="cart-drawer">
     <div class="drawer-head"><h3>Корзина</h3><button class="ci-remove" style="font-size:1.4rem" onclick="closeDrawer()">✕</button></div>
     <div class="drawer-body" id="cart-items"></div>
     <div class="drawer-foot" id="cart-footer"></div>
   </div>
-
   <header class="site-header" id="site-header"></header>
-
   <!-- MARQUEE -->
   <div class="marquee">
     <span>PLAY WITH PURPOSE</span><span>BUILT FOR THE GAME</span><span>YOUR GAME. YOUR STYLE</span><span>PHANTOM ONLINE</span><span>FOOTBALL CULTURE</span>
   </div>
-
   <!-- HERO -->
   <section class="hero" id="site-hero">
     <div class="hero-glow"></div>
@@ -35,8 +31,8 @@
       <h1>PHANTOM <span class="outline">ONLINE</span><br><span class="grad">FOOTBALL CULTURE.</span><br>FOOTBALL PRODUCTS.</h1>
       <p class="hero-sub">Бутсы, футболки топ-клубов, доступные аналоги и полная экипировка — для тех, кто играет с целью. Премиальная футбольная культура в одном месте.</p>
       <div class="hero-cta">
-        <a href="pages/catalog.html" class="btn btn-primary btn-lg">Перейти в каталог</a>
-        <a href="pages/analogues.html" class="btn btn-ghost btn-lg">Доступные аналоги</a>
+        <a class='btn btn-primary btn-lg' href='/pages/catalog'>Перейти в каталог</a>
+        <a class='btn btn-ghost btn-lg' href='/pages/analogues'>Доступные аналоги</a>
       </div>
       <div class="hero-stats">
         <div class="stat"><div class="num" id="stat-products">—</div><div class="lbl">товаров</div></div>
@@ -49,95 +45,86 @@
       </div>
     </div>
   </section>
-
   <!-- NEW ARRIVALS -->
   <section class="section">
     <div class="container">
       <div class="section-head">
         <h2 class="section-title"><small>NEW ARRIVALS</small>Новинки</h2>
-        <a class="section-link" href="pages/catalog.html?sort=new">Все новинки →</a>
+        <a class='section-link' href='/pages/catalog?sort=new'>Все новинки →</a>
       </div>
       <div class="cards" id="home-new"></div>
     </div>
   </section>
-
   <!-- COLLECTIONS -->
   <section class="section" style="padding-top:0">
     <div class="container">
       <div class="section-head">
         <h2 class="section-title"><small>SPECIAL COLLECTIONS</small>Коллекции</h2>
-        <a class="section-link" href="pages/collections.html">Все коллекции →</a>
+        <a class='section-link' href='/pages/collections'>Все коллекции →</a>
       </div>
       <div class="collection-grid" id="home-collections"></div>
     </div>
   </section>
-
   <!-- BOOTS -->
   <section class="section" style="padding-top:10px">
     <div class="container">
       <div class="section-head">
         <h2 class="section-title"><small>БУТСЫ</small>Бутсы для игры</h2>
-        <a class="section-link" href="pages/catalog.html?cat=boots">Все бутсы →</a>
+        <a class='section-link' href='/pages/catalog?cat=boots'>Все бутсы →</a>
       </div>
       <div class="cards" id="home-boots"></div>
     </div>
   </section>
-
   <!-- ANALOGUES banner -->
   <section class="section" style="padding:20px 0">
     <div class="container">
-      <div class="analogue-banner banner-cta" style="background:linear-gradient(120deg,#b32450,#e6395f 40%,#ff7a2f)">
+      <div class="analogue-banner banner-cta" style="background:linear-gradient(120deg,#5b21b6,#7c3aed 40%,#0ea5e9)">
         <h2>Доступные аналоги — <span style="color:var(--lime)">АНАЛОГИ</span></h2>
         <p>Похожие силуэты и игровые характеристики без большого бюджета. Доступная альтернатива для скорости, контроля, искусственного поля и индора.</p>
-        <a class="btn" href="pages/analogues.html">Смотреть аналоги</a>
+        <a class='btn' href='/pages/analogues'>Смотреть аналоги</a>
       </div>
     </div>
   </section>
-
   <!-- JERSEYS -->
   <section class="section">
     <div class="container">
       <div class="section-head">
         <h2 class="section-title"><small>ФУТБОЛКИ</small>Футболки топ-клубов</h2>
-        <a class="section-link" href="pages/jerseys.html">Все футболки →</a>
+        <a class='section-link' href='/pages/jerseys'>Все футболки →</a>
       </div>
       <div class="cards" id="home-jerseys"></div>
     </div>
   </section>
-
   <!-- TOP 5 LEAGUES -->
   <section class="section" style="padding-top:10px">
     <div class="container">
       <div class="section-head">
         <h2 class="section-title"><small>TOP 5 LEAGUES</small>Топ-5 лиг Европы</h2>
-        <a class="section-link" href="pages/leagues.html">Все лиги →</a>
+        <a class='section-link' href='/pages/leagues'>Все лиги →</a>
       </div>
       <div class="league-grid" id="home-leagues"></div>
     </div>
   </section>
-
   <!-- TRAINING -->
   <section class="section">
     <div class="container">
       <div class="section-head">
         <h2 class="section-title"><small>TRAINING</small>Тренировочная одежда</h2>
-        <a class="section-link" href="pages/catalog.html?cat=training">Всё для тренировок →</a>
+        <a class='section-link' href='/pages/catalog?cat=training'>Всё для тренировок →</a>
       </div>
       <div class="cards" id="home-training"></div>
     </div>
   </section>
-
   <!-- ACCESSORIES + TICKS -->
   <section class="section" style="padding-top:10px">
     <div class="container">
       <div class="section-head">
         <h2 class="section-title"><small>ACCESSORIES</small>Экипировка и аксессуары</h2>
-        <a class="section-link" href="pages/catalog.html?cat=accessories">Все аксессуары →</a>
+        <a class='section-link' href='/pages/catalog?cat=accessories'>Все аксессуары →</a>
       </div>
       <div class="cards" id="home-accessories"></div>
     </div>
   </section>
-
   <!-- WHY US -->
   <section class="section" style="padding-top:20px">
     <div class="container">
@@ -149,26 +136,20 @@
       </div>
     </div>
   </section>
-
   <footer class="site-footer" id="site-footer"></footer>
-
   <script src="js/data/catalog.js"></script>
   <script src="js/ui.js?v=12"></script>
-  <script>window.PHANTOM_API_URL = window.PHANTOM_API_URL || 'https://phantom-online-api.onrender.com/api';</script>
-  <script src="js/api-adapter.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const all = Catalog.getAll();
       document.getElementById('stat-products').textContent = all.length;
       const brands = new Set(all.map(p => p.brand).filter(Boolean));
       document.getElementById('stat-brands').textContent = brands.size;
-
       document.getElementById('home-new').innerHTML = Catalog.newArrivals().slice(0, 6).map(productCard).join('') || '<div class="empty">Скоро</div>';
       document.getElementById('home-boots').innerHTML = Catalog.byCategory('boots').slice(0, 6).map(productCard).join('') || '<div class="empty">Скоро</div>';
       document.getElementById('home-jerseys').innerHTML = Catalog.byCategory('jersey').slice(0, 6).map(productCard).join('') || '<div class="empty">Скоро</div>';
       document.getElementById('home-training').innerHTML = Catalog.byCategory('training').slice(0,4).map(productCard).join('') || '<div class="empty">Скоро</div>';
       document.getElementById('home-accessories').innerHTML = Catalog.byCategory('accessories').slice(0,4).map(productCard).join('') || '<div class="empty">Скоро</div>';
-
       // collections
       document.getElementById('home-collections').innerHTML = COLLECTIONS.map(c =>
         '<a class="collection-card ' + c.color + '" href="pages/collections.html?c=' + c.key + '" style="--cc:' +
@@ -180,7 +161,6 @@
          'linear-gradient(150deg,#27272a,#18181b)') + '">' +
           '<small>' + c.tagline + '</small><h3>' + c.name + '</h3><p>' + c.desc + '</p><span class="go">Смотреть →</span>' +
         '</a>').join('');
-
       // leagues
       document.getElementById('home-leagues').innerHTML = LEAGUES.map(l =>
         '<a class="league-card" href="pages/catalog.html?league=' + l.key + '" style="--league-c:linear-gradient(140deg,' +

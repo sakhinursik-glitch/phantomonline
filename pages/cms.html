@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
@@ -10,9 +10,7 @@
   <link rel="stylesheet" href="../css/styles.css?v=12">
 </head>
 <body>
-
   <header class="site-header" id="site-header"></header>
-
   <!-- ЭКРАН ВХОДА В АДМИНКУ -->
   <div id="admin-login" class="section" style="padding-top:40px">
     <div class="container" style="max-width:420px">
@@ -26,18 +24,16 @@
       </div>
     </div>
   </div>
-
   <!-- САМА ПАНЕЛЬ -->
   <section id="admin-panel" style="display:none">
     <section class="page-head">
       <div class="container">
-        <div class="breadcrumb"><a href="../index.html">Главная</a> / <span>Админ-панель</span></div>
+        <div class="breadcrumb"><a href='/'>Главная</a> / <span>Админ-панель</span></div>
         <h1>Управление каталогом (CMS)</h1>
         <p class="page-desc">Редактируйте товары без правки кода. Изменения сохраняются в localStorage браузера. Список товаров на CMS-панели.</p>
         <button class="btn btn-ghost" style="margin-top:12px;font-size:.85rem" onclick="adminLogout()">Выйти из админки</button>
       </div>
     </section>
-
     <section class="section" style="padding-top:24px">
       <div class="container">
         <div class="cms-layout">
@@ -46,19 +42,14 @@
             <a href="#" onclick="showView('add');return false">+ Добавить товар</a>
             <a href="#" onclick="resetAll();return false" style="color:var(--red)">Сбросить к исходным</a>
           </aside>
-
           <div id="cms-view"></div>
         </div>
       </div>
     </section>
   </section>
-
   <footer class="site-footer" id="site-footer"></footer>
-
   <script src="../js/data/catalog.js"></script>
   <script src="../js/ui.js?v=12"></script>
   <script src="../js/cms-page.js"></script>
-  <script>window.PHANTOM_API_URL = window.PHANTOM_API_URL || 'https://phantom-online-api.onrender.com/api';</script>
-  <script src="../js/api-adapter.js"></script>
 </body>
 </html>

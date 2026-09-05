@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
@@ -10,24 +10,20 @@
   <link rel="stylesheet" href="../css/styles.css?v=12">
 </head>
 <body>
-
   <div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawer()"></div>
   <div class="drawer" id="cart-drawer">
     <div class="drawer-head"><h3>Корзина</h3><button class="ci-remove" style="font-size:1.4rem" onclick="closeDrawer()">✕</button></div>
     <div class="drawer-body" id="cart-items"></div>
     <div class="drawer-foot" id="cart-footer"></div>
   </div>
-
   <header class="site-header" id="site-header"></header>
-
   <section class="page-head">
     <div class="container">
-      <div class="breadcrumb"><a href="../index.html">Главная</a> / <span>Футболки</span></div>
+      <div class="breadcrumb"><a href='/'>Главная</a> / <span>Футболки</span></div>
       <h1>Игровые футболки</h1>
       <p class="page-desc">Футболки клубов топ-5 лиг. Выберите клуб, имя и номер — кастомизируйте под себя.</p>
     </div>
   </section>
-
   <section class="section" style="padding-top:24px">
     <div class="container">
       <div class="chip-filter" style="margin-bottom:26px" id="jersey-league-bar"></div>
@@ -35,35 +31,27 @@
       <div class="empty" id="jersey-empty" style="display:none"><div class="big">Футболок пока нет</div></div>
     </div>
   </section>
-
   <!-- CUSTOMIZER CTA -->
   <section class="section" style="padding-top:0">
     <div class="container">
-      <div class="analogue-banner banner-cta" style="background:linear-gradient(120deg,#b32450,#ff4d9c 55%,#ff7a2f)">
+      <div class="analogue-banner banner-cta" style="background:linear-gradient(120deg,#ec4899,#8b5cf6 55%,#6366f1)">
         <h2>Свой игрок. Своя футболка.</h2>
         <p>Выберите любую футболку из каталога и добавьте имя и номер любимого игрока — или своё собственное.</p>
-        <a class="btn" href="catalog.html?cat=jersey">Выбрать футболку</a>
+        <a class='btn' href='/pages/catalog?cat=jersey'>Выбрать футболку</a>
       </div>
     </div>
   </section>
-
   <footer class="site-footer" id="site-footer"></footer>
-
   <script src="../js/data/catalog.js"></script>
   <script src="../js/ui.js?v=12"></script>
-  <script>window.PHANTOM_API_URL = window.PHANTOM_API_URL || 'https://phantom-online-api.onrender.com/api';</script>
-  <script src="../js/api-adapter.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const all = Catalog.byCategory('jersey');
       let active = new URLSearchParams(location.search).get('league') || 'all';
-
       const bar = document.getElementById('jersey-league-bar');
       const leagues = [{key:'all',name:'Все лиги'}, ...LEAGUES];
       bar.innerHTML = leagues.map(l => '<span class="chip' + (active === l.key ? ' on' : '') + '" data-l="' + l.key + '" style="cursor:pointer" onclick="setLeague(\'' + l.key + '\')">' + l.name + '</span>').join('');
-
       window.setLeague = (k) => { active = k; render(); bar.querySelectorAll('.chip').forEach(c => c.classList.toggle('on', c.dataset.l === k)); };
-
       function render() {
         let list = active === 'all' ? all : all.filter(p => p.league === active);
         const clubs = {};

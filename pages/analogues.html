@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
@@ -10,16 +10,13 @@
   <link rel="stylesheet" href="../css/styles.css?v=12">
 </head>
 <body>
-
   <div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawer()"></div>
   <div class="drawer" id="cart-drawer">
     <div class="drawer-head"><h3>Корзина</h3><button class="ci-remove" style="font-size:1.4rem" onclick="closeDrawer()">✕</button></div>
     <div class="drawer-body" id="cart-items"></div>
     <div class="drawer-foot" id="cart-footer"></div>
   </div>
-
   <header class="site-header" id="site-header"></header>
-
   <section class="hero" style="min-height:60vh;align-items:flex-start">
     <div class="hero-glow"></div>
     <div class="hero-grid"></div>
@@ -35,7 +32,6 @@
       </div>
     </div>
   </section>
-
   <section class="section" style="padding-top:20px">
     <div class="container">
       <div class="chip-filter" style="margin-bottom:26px" id="analogue-sub-bar"></div>
@@ -44,13 +40,9 @@
       <div class="legal-note" style="margin-top:26px;padding:18px;border:1px solid var(--border);border-radius:16px">Аналоги PHANTOM — это доступные альтернативы, вдохновлённые узнаваемыми силуэтами и игровыми характеристиками. Мы не заявляем, что это официальные продукты Nike, adidas или Puma.</div>
     </div>
   </section>
-
   <footer class="site-footer" id="site-footer"></footer>
-
   <script src="../js/data/catalog.js"></script>
   <script src="../js/ui.js?v=12"></script>
-  <script>window.PHANTOM_API_URL = window.PHANTOM_API_URL || 'https://phantom-online-api.onrender.com/api';</script>
-  <script src="../js/api-adapter.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const all = Catalog.byCategory('analogue');
@@ -58,7 +50,6 @@
       let active = 'all';
       const bar = document.getElementById('analogue-sub-bar');
       bar.innerHTML = '<span class="chip' + (active==='all'?' on':'') + '" style="cursor:pointer" onclick="setA(\'all\')">Все</span>' + subs.map(s => '<span class="chip" data-s="' + s + '" style="cursor:pointer" onclick=\'setA("' + s + '")\'>' + s + '</span>').join('');
-
       window.setA = function(s) { active = s; renderA(); bar.querySelectorAll('.chip').forEach(c => c.classList.toggle('on', active==='all' ? c.dataset.s===undefined : c.dataset.s===s)); };
       function renderA() {
         const list = active==='all' ? all : all.filter(p => p.subcategory === active);

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
@@ -10,24 +10,20 @@
   <link rel="stylesheet" href="../css/styles.css?v=12">
 </head>
 <body>
-
   <div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawer()"></div>
   <div class="drawer" id="cart-drawer">
     <div class="drawer-head"><h3>Корзина</h3><button class="ci-remove" style="font-size:1.4rem" onclick="closeDrawer()">✕</button></div>
     <div class="drawer-body" id="cart-items"></div>
     <div class="drawer-foot" id="cart-footer"></div>
   </div>
-
   <header class="site-header" id="site-header"></header>
-
   <section class="page-head">
     <div class="container">
-      <div class="breadcrumb"><a href="../index.html">Главная</a> / <span>Каталог</span></div>
+      <div class="breadcrumb"><a href='/'>Главная</a> / <span>Каталог</span></div>
       <h1>Каталог</h1>
       <p class="page-desc">Ищите бутсы, футболки, экипировку. Фильтры по бренду, категории, поверхности, уровню, размеру и цене.</p>
     </div>
   </section>
-
   <section class="section" style="padding-top:24px">
     <div class="container">
       <!-- Фильтры -->
@@ -83,19 +79,14 @@
         </div>
         <div class="chip-filter" id="chip-bar"></div>
       </div>
-
       <div class="result-meta"><span>Найдено: <strong id="result-count">0</strong></span><button class="btn btn-ghost" style="padding:8px 14px" onclick="resetFilters()">Сбросить</button></div>
       <div class="cards" id="catalog-grid"></div>
       <div class="empty" id="catalog-empty" style="display:none"><div class="big">Ничего не найдено</div><p style="margin-top:8px">Попробуйте изменить запрос или сбросить фильтры</p></div>
     </div>
   </section>
-
   <footer class="site-footer" id="site-footer"></footer>
-
   <script src="../js/data/catalog.js"></script>
   <script src="../js/catalog-page.js"></script>
   <script src="../js/ui.js?v=12"></script>
-  <script>window.PHANTOM_API_URL = window.PHANTOM_API_URL || 'https://phantom-online-api.onrender.com/api';</script>
-  <script src="../js/api-adapter.js"></script>
 </body>
 </html>

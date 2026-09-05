@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
@@ -10,36 +10,28 @@
   <link rel="stylesheet" href="../css/styles.css?v=12">
 </head>
 <body>
-
   <div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawer()"></div>
   <div class="drawer" id="cart-drawer">
     <div class="drawer-head"><h3>Корзина</h3><button class="ci-remove" style="font-size:1.4rem" onclick="closeDrawer()">✕</button></div>
     <div class="drawer-body" id="cart-items"></div>
     <div class="drawer-foot" id="cart-footer"></div>
   </div>
-
   <header class="site-header" id="site-header"></header>
-
   <section class="page-head">
     <div class="container">
-      <div class="breadcrumb"><a href="../index.html">Главная</a> / <span>Лиги</span></div>
+      <div class="breadcrumb"><a href='/'>Главная</a> / <span>Лиги</span></div>
       <h1>Топ-5 лиг Европы</h1>
       <p class="page-desc">Premier League, La Liga, Serie A, Bundesliga и Ligue 1. Футболки и экипировка клубов.</p>
     </div>
   </section>
-
   <section class="section" style="padding-top:26px">
     <div class="container">
       <div class="league-grid" id="league-grid"></div>
     </div>
   </section>
-
   <footer class="site-footer" id="site-footer"></footer>
-
   <script src="../js/data/catalog.js"></script>
   <script src="../js/ui.js?v=12"></script>
-  <script>window.PHANTOM_API_URL = window.PHANTOM_API_URL || 'https://phantom-online-api.onrender.com/api';</script>
-  <script src="../js/api-adapter.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const grid = document.getElementById('league-grid');
