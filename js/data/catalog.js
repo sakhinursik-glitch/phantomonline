@@ -671,15 +671,7 @@ const DEFAULT_CATALOG = [
     description: "Полный тренировочный комплект PSG 2026/27: куртка и брюки. Фирменные детали клуба.",
     image: "👔", featured: true, stock: 22, collection: "training"
   },
-  {
-    id: "tr-om-kit", name: "Тренировочный комплект Marseille 2026/27", brand: "Puma",
-    category: "training", subcategory: "Training kits", productType: "Training kit", league: "ligue-1", club: "Marseille",
-    season: "2026/27", price: 17000, sizes: ["S","M","L","XL","XXL"],
-    material: "dryCELL", fit: "Спортивная",
-    description: "Полный тренировочный комплект Marseille 2026/27: куртка и брюки. Фирменные детали клуба.",
-    image: "👔", stock: 14, collection: "training"
-  }
-];
+  ];
 
 /* ============================================================================
    Мастер-данные: лиги, клубы, поверхности, уровни
