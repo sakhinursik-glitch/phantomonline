@@ -473,7 +473,7 @@ h1, h2, h3, h4 { font-family: var(--display); font-weight: 600; line-height: 1.1
 @media (max-width: 580px) {
   .page-head { padding: 32px 0 8px; }
   #product-layout { padding: 18px; }
-  .gallery-main { aspect-ratio: auto; width: min(100%, 420px); height: min(50vh, 420px); margin: 0 auto; border-radius: 18px; }
+  .gallery-main { aspect-ratio: 1/1; width: min(100%, 440px, 62vh); height: auto; margin: 0 auto; border-radius: 18px; }
   .gallery-thumbs { justify-content: center; flex-wrap: wrap; }
   .g-thumb { width: 76px; height: 76px; border-radius: 12px; }
   .g-thumb img { object-fit: contain; }
@@ -482,6 +482,5 @@ h1, h2, h3, h4 { font-family: var(--display); font-weight: 600; line-height: 1.1
   #product-backdrop .pb-img { opacity: 0.4; }
 }
 @media (max-width: 380px) {
-  .gallery-main { width: 100%; height: min(46vh, 360px); }
-  .g-thumb { width: 62px; height: 62px; }
+  .g-thumb { width: 60px; height: 60px; }
 }
