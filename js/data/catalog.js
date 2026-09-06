@@ -46,20 +46,21 @@
 const DEFAULT_CATALOG = [
   /* ─────────────────────────── БУТСЫ · SPEED · ELITE 2026 ─────────────── */
   {
-    id: "nike-merc-vapor",
-    name: "Nike Mercurial Vapor 17 Elite",
+    id: "nike-merc-vapor16",
+    name: "Nike Mercurial Vapor 16 Elite",
     brand: "Nike",
     category: "boots", subcategory: "SPEED BOOTS", productType: "Speed boots",
-    price: 20000, oldPrice: 25000, discount: 20, sizes: ["EU 40","EU 40.5","EU 41","EU 42","EU 42.5","EU 43","EU 44","EU 45"],
+    price: 20000, oldPrice: 25000, discount: 20, sizes: ["EU 39","EU 40","EU 40.5","EU 41","EU 42","EU 42.5","EU 43","EU 44","EU 45"],
     surface: ["FG"], level: "ELITE", playerProfile: "Speed / Attack",
     material: "Flyknit", weight: "185 г", fit: "Тесная / гоночная",
     upper: "Vaporposite легчайший сетчатый верх", soleplate: "CarbonFiber карбоновая пластина", generation: "2026",
     description: "Силуэт главного ускорителя. Гоночная посадка, максимальная отдача на шаге. Создан для фланговых атак и рывков на скорости — идеален для вингеров и нападающих.",
-    image: "⚡", featured: true, bestseller: true, isNew: true, stock: 12, collection: "speed"
+    images: ["assets/img/boots/vapor16-1.webp","assets/img/boots/vapor16-2.jpg","assets/img/boots/vapor16-3.jpg","assets/img/boots/vapor16-4.jpg","assets/img/boots/vapor16-5.png","assets/img/boots/vapor16-6.avif"],
+    featured: true, bestseller: true, isNew: true, stock: 12, collection: "speed"
   },
   {
-    id: "nike-merc-superfly",
-    name: "Nike Mercurial Superfly 11 Elite",
+    id: "nike-merc-superfly10",
+    name: "Nike Mercurial Superfly 10 Elite",
     brand: "Nike",
     category: "boots", subcategory: "SPEED BOOTS", productType: "Speed boots",
     price: 20000, oldPrice: 25000, discount: 20, sizes: ["EU 39","EU 40","EU 41","EU 42","EU 43","EU 44"],
@@ -67,7 +68,8 @@ const DEFAULT_CATALOG = [
     material: "Flyknit высокая посадка", weight: "225 г", fit: "Фиксация с голеностопом",
     upper: "Vaporposite 3.0", soleplate: "Aerotrack", generation: "2026",
     description: "Флагманская версия Mercurial с высокой посадкой и тотальной фиксацией. Лёгкая конструкция и агрессивная геометрия для взрывных стартов.",
-    image: "🚀", featured: true, isNew: true, stock: 8, collection: "speed"
+    images: ["assets/img/boots/superfly10-1.webp","assets/img/boots/superfly10-2.jpg","assets/img/boots/superfly10-3.jpg","assets/img/boots/superfly10-4.jpg","assets/img/boots/superfly10-5.webp","assets/img/boots/superfly10-6.webp","assets/img/boots/superfly10-7.png"],
+    featured: true, isNew: true, stock: 9, collection: "speed"
   },
   {
     id: "adidas-f50",

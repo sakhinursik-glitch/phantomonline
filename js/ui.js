@@ -66,12 +66,18 @@ function productArt(p) {
     }
   } else if (cat === 'boots' || cat === 'analogue' || cat === 'street') {
     const sf = p.surface ? p.surface[0] : 'FG';
-    const model = detectBootModel(p);
-    const pfile = model ? (bootPhotoMap[model] || '') : '';
-    if (pfile) {
-      art = '<img loading="lazy" src="' + ROOT + 'assets/img/boots/' + pfile + '" alt="' + esc(p.name) + '" ' +
+    let src = '', model = '';
+    if (p.images && p.images.length) {
+      src = ROOT + p.images[0];
+    } else {
+      model = detectBootModel(p);
+      const pfile = model ? (bootPhotoMap[model] || '') : '';
+      if (pfile) src = ROOT + 'assets/img/boots/' + pfile;
+    }
+    if (src) {
+      art = '<img loading="lazy" src="' + src + '" alt="' + esc(p.name) + '" ' +
         'onerror="bootPhotoFail(this,\'' + model + '\',\'' + sf + '\')" ' +
-        'style="width:100%;height:100%;object-fit:cover;display:block">';
+        'style="width:100%;height:100%;object-fit:cover;display:block;background:#fff">';
     } else {
       art = model ? bootCoverSVG(model, sf) : bootSVG(accent, accent2, sf);
     }

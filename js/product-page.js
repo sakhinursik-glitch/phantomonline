@@ -74,9 +74,18 @@ function renderDetail() {
   setProductBackdrop(bg);
   const main = document.getElementById('product-gallery');
   const thumbs = document.getElementById('product-thumbs');
-  main.innerHTML = productImgHTML(p);
-  thumbs.innerHTML = '<div class="g-thumb">' + productImgHTML(p) + '</div>' +
-    '<div class="g-thumb">' + productImgHTML(p) + '</div>';
+  const imgs = p.images && p.images.length ? p.images : null;
+  if (imgs) {
+    main.innerHTML = '<img src="' + ROOT + imgs[0] + '" alt="' + esc(p.name) + '" onerror="detailPhotoFail(this)" style="width:100%;height:100%;object-fit:cover;display:block;background:#fff">';
+    thumbs.innerHTML = imgs.map((im, i) =>
+      '<div class="g-thumb' + (i === 0 ? ' on' : '') + '" onclick="selectColorway(' + i + ')" title="Расцветка ' + (i + 1) + '">' +
+        '<img loading="lazy" src="' + ROOT + im + '" alt="Расцветка ' + (i + 1) + '" onerror="this.closest(\'.g-thumb\').style.display=\'none\'">' +
+      '</div>').join('');
+  } else {
+    main.innerHTML = productImgHTML(p);
+    thumbs.innerHTML = '<div class="g-thumb">' + productImgHTML(p) + '</div>' +
+      '<div class="g-thumb">' + productImgHTML(p) + '</div>';
+  }
 
   document.getElementById('product-name').textContent = p.name;
   document.getElementById('product-brand').textContent = p.brand || 'PHANTOM';
@@ -126,6 +135,16 @@ function renderCustomizer(p) {
 }
 
 function pickSize(s) { selectedSize = s; const p = currentProduct; if (!p) return; document.getElementById('product-sizes').innerHTML = p.sizes.map(x => '<div class="size-opt' + (x === s ? ' on' : '') + '" onclick="pickSize(\'' + esc(x) + '\')">' + esc(x) + '</div>').join(''); }
+
+function selectColorway(i) {
+  const p = currentProduct;
+  if (!p || !p.images || !p.images[i]) return;
+  const mains = document.querySelectorAll('#product-gallery img');
+  mains.forEach(m => m.src = ROOT + p.images[i]);
+  document.querySelectorAll('#product-thumbs .g-thumb').forEach((t, j) => t.className = 'g-thumb' + (j === i ? ' on' : ''));
+}
+
+function detailPhotoFail(imgEl) { if (imgEl) imgEl.style.display = 'none'; }
 function changeDetail(_, d) { detailQty = Math.max(1, detailQty + d); document.getElementById('product-qty').textContent = detailQty; }
 
 function buyNow() {
