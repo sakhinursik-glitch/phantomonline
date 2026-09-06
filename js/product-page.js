@@ -82,7 +82,14 @@ function renderDetail() {
         '<img loading="lazy" src="' + ROOT + im + '" alt="Расцветка ' + (i + 1) + '" onerror="this.closest(\'.g-thumb\').style.display=\'none\'">' +
       '</div>').join('');
   } else {
-    main.innerHTML = productImgHTML(p);
+    const msrc = productPhotoSrc(p);
+    if (msrc) {
+      const mf = p.surface ? p.surface[0] : 'FG';
+      const mm = detectBootModel(p);
+      main.innerHTML = '<img src="' + msrc + '" alt="' + esc(p.name) + '" onerror="bootPhotoFail(this,\'' + mm + '\',\'' + mf + '\')" style="width:100%;height:100%;object-fit:contain;display:block;background:#14182a">';
+    } else {
+      main.innerHTML = productImgHTML(p);
+    }
     thumbs.innerHTML = '<div class="g-thumb">' + productImgHTML(p) + '</div>' +
       '<div class="g-thumb">' + productImgHTML(p) + '</div>';
   }

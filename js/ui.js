@@ -456,6 +456,21 @@ function productImgHTML(p) {
   return productArt(p);
 }
 
+function productPhotoSrc(p) {
+  if (!p) return '';
+  if (p.images && p.images.length) return ROOT + p.images[0];
+  if (p.category === 'boots' || p.category === 'analogue' || p.category === 'street') {
+    const model = detectBootModel(p);
+    const pfile = model ? (bootPhotoMap[model] || '') : '';
+    if (pfile) return ROOT + 'assets/img/boots/' + pfile;
+  }
+  if (p.category === 'jersey' || p.category === 'retro') {
+    const jfile = p.club ? (jerseyPhotoMap[p.club] || '') : '';
+    if (jfile) return ROOT + 'assets/img/jerseys/' + jfile;
+  }
+  return '';
+}
+
 function badgeRow(p) {
   let h = '<div class="badge-row">';
   if (p.isNew) h += '<span class="badge badge-new">NEW</span>';
