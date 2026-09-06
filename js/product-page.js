@@ -76,7 +76,7 @@ function renderDetail() {
   const thumbs = document.getElementById('product-thumbs');
   const imgs = p.images && p.images.length ? p.images : null;
   if (imgs) {
-    main.innerHTML = '<img src="' + ROOT + imgs[0] + '" alt="' + esc(p.name) + '" onerror="detailPhotoFail(this)" style="width:100%;height:100%;object-fit:cover;display:block;background:#14182a">';
+    main.innerHTML = '<img src="' + ROOT + imgs[0] + '" alt="' + esc(p.name) + '" onerror="detailPhotoFail(this)" style="width:100%;height:100%;object-fit:contain;display:block;background:#14182a">';
     thumbs.innerHTML = imgs.map((im, i) =>
       '<div class="g-thumb' + (i === 0 ? ' on' : '') + '" onclick="selectColorway(' + i + ')" title="Расцветка ' + (i + 1) + '">' +
         '<img loading="lazy" src="' + ROOT + im + '" alt="Расцветка ' + (i + 1) + '" onerror="this.closest(\'.g-thumb\').style.display=\'none\'">' +
