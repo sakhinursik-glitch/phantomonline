@@ -680,6 +680,81 @@ const DEFAULT_CATALOG = [
     material: "dryCELL", fit: "Спортивная",
     description: "Полный тренировочный комплект Marseille 2026/27: куртка и брюки. Фирменные детали клуба.",
     image: "👔", stock: 14, collection: "training"
+  },
+  /* ─────────────────────────── МЯЧИ · ТОП-5 ЛИГ ─────────────────────── */
+  {
+    id: "ball-laliga", name: "Мяч LaLiga", brand: "Puma",
+    category: "balls", subcategory: "МЯЧИ ТОП-5 ЛИГ", productType: "Match ball",
+    price: 9000, sizes: ["5"], level: "PRO", surface: ["FIFA Quality Pro"], generation: "2024/25",
+    material: "PU", weight: "410–450 г",
+    description: "Официальный мяч испанской Ла Лиги сезона 24/25 от Puma. Классическая бело-чёрная геометрия и надёжный верх для высочайшего контроля и точного паса.",
+    images: ["assets/img/balls/ball-laliga.jpg"], isNew: true, stock: 30
+  },
+  {
+    id: "ball-epl", name: "Мяч EPL", brand: "Nike",
+    category: "balls", subcategory: "МЯЧИ ТОП-5 ЛИГ", productType: "Match ball",
+    price: 9000, sizes: ["5"], level: "PRO", surface: ["FIFA Quality Pro"], generation: "2024/25",
+    material: "PU", weight: "410–450 г",
+    description: "Официальный мяч английской Премьер-лиги 24/25. Фирменные звёзды и яркий дизайн — для точных передач и мощных ударов.",
+    images: ["assets/img/balls/ball-epl.jpg"], isNew: true, stock: 30
+  },
+  {
+    id: "ball-bundesliga", name: "Мяч Bundesliga", brand: "adidas",
+    category: "balls", subcategory: "МЯЧИ ТОП-5 ЛИГ", productType: "Match ball",
+    price: 9000, sizes: ["5"], level: "PRO", surface: ["FIFA Quality Pro"], generation: "2024/25",
+    material: "PU", weight: "410–450 г",
+    description: "Мяч немецкой Бундеслиги 24/25. Контрастное исполнение и отличный отскок на любом газоне.",
+    images: ["assets/img/balls/ball-bundesliga.jpg"], isNew: true, stock: 30
+  },
+  {
+    id: "ball-seria", name: "Мяч Serie A", brand: "Puma",
+    category: "balls", subcategory: "МЯЧИ ТОП-5 ЛИГ", productType: "Match ball",
+    price: 9000, sizes: ["5"], level: "PRO", surface: ["FIFA Quality Pro"], generation: "2024/25",
+    material: "PU", weight: "410–450 г",
+    description: "Мяч итальянской Серии А 24/25. Аккуратная раскраска и стабильный полёт — вместе с кальчо.",
+    images: ["assets/img/balls/ball-seria.jpg"], isNew: true, stock: 30
+  },
+  /* ─────────────────────── МЯЧИ · ЛИГА ЧЕМПИОНОВ ────────────────────── */
+  {
+    id: "ball-champions", name: "Мяч Champions League", brand: "adidas",
+    category: "balls", subcategory: "МЯЧИ ЛИГИ ЧЕМПИОНОВ", productType: "Match ball",
+    price: 9000, sizes: ["5"], level: "PRO", surface: ["FIFA Quality Pro"], generation: "2024/25",
+    material: "PU", weight: "410–450 г",
+    description: "Официальный мяч Лиги чемпионов. Звёздная панель и фирменный дизайн европейской короны — как в финалах турнира.",
+    images: ["assets/img/balls/chl-1.webp","assets/img/balls/chl-2.jpg","assets/img/balls/chl-3.jpg"], featured: true, isNew: true, stock: 25
+  },
+  /* ─────────────────────── МЯЧИ · ЧЕМПИОНАТ МИРА ─────────────────────── */
+  {
+    id: "ball-brazuca-2014", name: "Мяч Brazuca 2014", brand: "adidas",
+    category: "balls", subcategory: "МЯЧИ ЧЕМПИОНАТА МИРА", productType: "Official match ball",
+    price: 9000, sizes: ["5"], level: "PRO", surface: ["FIFA Quality Pro"], generation: "2014",
+    material: "PU", weight: "410–450 г",
+    description: "Легендарный Brazuca — официальный мяч ЧМ-2014 в Бразилии: шесть панелей и культовый узор.",
+    images: ["assets/img/balls/ball-brazuca-2014.jpg"], isNew: true, stock: 25
+  },
+  {
+    id: "ball-qatar-2022", name: "Мяч Qatar 2022", brand: "adidas",
+    category: "balls", subcategory: "МЯЧИ ЧЕМПИОНАТА МИРА", productType: "Official match ball",
+    price: 9000, sizes: ["5"], level: "PRO", surface: ["FIFA Quality Pro"], generation: "2022",
+    material: "PU", weight: "410–450 г",
+    description: "Al Rihla — официальный мяч ЧМ-2022 в Катаре. Быстрый полёт и увеличенные зоны для точного контроля.",
+    images: ["assets/img/balls/ball-qatar-2022.jpg"], isNew: true, stock: 25
+  },
+  {
+    id: "ball-telstar-2018", name: "Мяч Telstar 2018", brand: "adidas",
+    category: "balls", subcategory: "МЯЧИ ЧЕМПИОНАТА МИРА", productType: "Official match ball",
+    price: 9000, sizes: ["5"], level: "PRO", surface: ["FIFA Quality Pro"], generation: "2018",
+    material: "PU", weight: "410–450 г",
+    description: "Telstar — официальный мяч ЧМ-2018 в России. Легендарная чёрно-белая панельная схема в современном прочтении.",
+    images: ["assets/img/balls/ball-telstar-2018.jpg"], isNew: true, stock: 25
+  },
+  {
+    id: "ball-trionda-2026", name: "Мяч Trionda 2026", brand: "adidas",
+    category: "balls", subcategory: "МЯЧИ ЧЕМПИОНАТА МИРА", productType: "Official match ball",
+    price: 9000, sizes: ["5"], level: "PRO", surface: ["FIFA Quality Pro"], generation: "2026",
+    material: "PU", weight: "410–450 г",
+    description: "Trionda — официальный мяч ЧМ-2026. Футуристичный дизайн и новая панельная конструкция.",
+    images: ["assets/img/balls/ball-trionda-2026.webp"], featured: true, isNew: true, stock: 25
   }
 ];
 

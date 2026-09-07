@@ -82,7 +82,15 @@ function productArt(p) {
       art = model ? bootCoverSVG(model, sf) : bootSVG(accent, accent2, sf);
     }
   } else if (cat === 'balls') {
-    art = ballSVG(accent, accent2);
+    let bsrc = '';
+    if (p.images && p.images.length) bsrc = ROOT + p.images[0];
+    if (bsrc) {
+      art = '<img loading="lazy" src="' + bsrc + '" alt="' + esc(p.name) + '" ' +
+        'onerror="this.outerHTML=ballSVG(\'#a78bfa\',\'#22d3ee\')" ' +
+        'style="width:100%;height:100%;object-fit:cover;display:block;background:#fff">';
+    } else {
+      art = ballSVG(accent, accent2);
+    }
   } else if (cat === 'gk') {
     art = gloveSVG(accent, accent2);
   } else if (cat === 'socks') {
