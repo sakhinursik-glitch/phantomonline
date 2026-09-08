@@ -44,7 +44,8 @@
    ============================================================================ */
 
 const DEFAULT_CATALOG = [
-  /* ─────────────────────────── БУТСЫ · SPEED · ELITE 2026 ─────────────── */
+
+  /* ═══════════════════════ БУТСЫ · FG · ELITE 2026 ══════════════════════ */
   {
     id: "nike-merc-vapor16",
     name: "Nike Mercurial Vapor 16 Elite",
@@ -54,7 +55,7 @@ const DEFAULT_CATALOG = [
     surface: ["FG"], level: "ELITE", playerProfile: "Speed / Attack",
     material: "Flyknit", weight: "185 г", fit: "Тесная / гоночная",
     upper: "Vaporposite легчайший сетчатый верх", soleplate: "CarbonFiber карбоновая пластина", generation: "2026",
-    description: "Силуэт главного ускорителя. Гоночная посадка, максимальная отдача на шаге. Создан для фланговых атак и рывков на скорости — идеален для вингеров и нападающих.",
+    description: "Силуэт главного ускорителя. Гоночная посадка, максимальная отдача на шаге. Создан для фланговых атак и рывков на скорости.",
     images: ["assets/img/boots/vapor16-1.webp","assets/img/boots/vapor16-2.jpg","assets/img/boots/vapor16-3.jpg","assets/img/boots/vapor16-4.jpg","assets/img/boots/vapor16-5.png","assets/img/boots/vapor16-6.avif"],
     featured: true, bestseller: true, isNew: true, stock: 12, collection: "speed"
   },
@@ -72,8 +73,8 @@ const DEFAULT_CATALOG = [
     featured: true, isNew: true, stock: 9, collection: "speed"
   },
   {
-    id: "adidas-f50",
-    name: "adidas F50 Hyperfast Elite",
+    id: "adidas-f50-elite",
+    name: "Adidas F50 Elite",
     brand: "adidas",
     category: "boots", subcategory: "SPEED BOOTS", productType: "Speed boots",
     price: 20000, oldPrice: 25000, discount: 20, sizes: ["EU 39","EU 40","EU 41","EU 42","EU 43","EU 44"],
@@ -81,7 +82,8 @@ const DEFAULT_CATALOG = [
     material: "Сетка с покрытием", weight: "205 г", fit: "Средняя",
     upper: "HybridTouch", soleplate: "SprintFrame 360", generation: "2026",
     description: "Скоростная серия с низкопрофильной подошвой для мгновенного ускорения. Лёгкий верх с точным контролем на высокой скорости.",
-    image: "🏃", featured: true, bestseller: true, stock: 15, collection: "speed"
+    images: ["assets/img/boots/f50elite-1.jpg","assets/img/boots/f50elite-2.jpg","assets/img/boots/f50elite-3.jpg","assets/img/boots/f50elite-4.jpg","assets/img/boots/f50elite-5.jpg","assets/img/boots/f50elite-6.jpg","assets/img/boots/f50elite-7.jpg","assets/img/boots/f50elite-8.jpg"],
+    featured: true, bestseller: true, stock: 15, collection: "speed"
   },
   {
     id: "puma-ultra",
@@ -93,239 +95,138 @@ const DEFAULT_CATALOG = [
     material: "UTHC лёгкий верх", weight: "195 г", fit: "Тесная",
     upper: "ULTRAWEAVE", soleplate: "SpeedUnit", generation: "2026",
     description: "Одна из самых лёгких моделей на рынке. Ультралёгкая конструкция для постоянного давления на оборону и максимальной скорости.",
-    image: "💨", isNew: true, stock: 10, collection: "speed"
+    images: ["assets/img/boots/ultra6.jpg"], isNew: true, stock: 10, collection: "speed"
   },
   {
-    id: "nike-phantom",
-    name: "Nike Phantom 6 Elite",
-    brand: "Nike",
-    category: "boots", subcategory: "CONTROL BOOTS", productType: "Control boots",
-    price: 20000, oldPrice: 25000, discount: 20, sizes: ["EU 39","EU 40","EU 41","EU 42","EU 43","EU 44"],
-    surface: ["FG","AG"], level: "ELITE", playerProfile: "Control / Passing / Finishing",
-    material: "Flyknit", weight: "240 г", fit: "Комфортная",
-    upper: "FlyTouch для приёма мяча", soleplate: "Nike GX", generation: "2026",
-    description: "Плеймейкерская классика. Разработана для точного паса, чистого приёма и завершения. Максимальная зона касания для творчества в центре поля.",
-    image: "🎯", featured: true, bestseller: true, isNew: true, stock: 9, collection: "control"
-  },
-  {
-    id: "nike-phantom-gx2",
-    name: "Nike Phantom GX 2 Elite",
+    id: "nike-phantom-gx3",
+    name: "Nike Phantom GX 3 Elite",
     brand: "Nike",
     category: "boots", subcategory: "CONTROL BOOTS", productType: "Control boots",
     price: 20000, oldPrice: 25000, discount: 20, sizes: ["EU 39","EU 40","EU 41","EU 42","EU 43","EU 44","EU 45"],
-    surface: ["FG","AG"], level: "ELITE", playerProfile: "Control / Passing / Finishing",
+    surface: ["FG"], level: "ELITE", playerProfile: "Control / Passing / Finishing",
     material: "GripknitPro", weight: "230 г", fit: "Комфортная",
-    upper: "GripknitPro сухое сцепление", soleplate: "Nike GX 2", generation: "2026",
+    upper: "GripknitPro сухое сцепление", soleplate: "Nike GX 3", generation: "2026",
     description: "Новое поколение плеймейкерских бутс Phantom. Рискованные пасы и выверенный приём даже на мокром газоне — зона контакта выросла, сцепление стало ещё надёжнее.",
-    image: "✨", featured: true, isNew: true, stock: 11, collection: "control"
+    images: ["assets/img/boots/phantomgx3-1.png","assets/img/boots/phantomgx3-2.webp","assets/img/boots/phantomgx3-3.webp"],
+    featured: true, isNew: true, stock: 11, collection: "control"
   },
   {
     id: "adidas-predator",
-    name: "adidas Predator 26 Elite",
+    name: "Adidas Predator 26 Elite",
     brand: "adidas",
     category: "boots", subcategory: "CONTROL BOOTS", productType: "Control boots",
     price: 20000, oldPrice: 25000, discount: 20, sizes: ["EU 40","EU 41","EU 42","EU 43","EU 44"],
-    surface: ["FG","AG"], level: "ELITE", playerProfile: "Ball control / Finishing",
+    surface: ["FG"], level: "ELITE", playerProfile: "Ball control / Finishing",
     material: "Кожа HybridTouch", weight: "250 г", fit: "Комфортная",
     upper: "HybridTouch с рифлением", soleplate: "ControlFrame", generation: "2026",
     description: "Легендарная линия с усиленными зонами для удара и контроля. Демонический топспин и уверенный приём даже под давлением.",
-    image: "👑", featured: true, bestseller: true, isNew: true, stock: 14, collection: "control"
+    images: ["assets/img/boots/predator26.webp","assets/img/boots/predator26-b.jpg","assets/img/boots/predator26-c.jpg","assets/img/boots/predator26-d.jpg"],
+    featured: true, bestseller: true, isNew: true, stock: 14, collection: "control"
   },
   {
-    id: "puma-future",
-    name: "Puma Future 9 Ultimate",
+    id: "puma-future8",
+    name: "Puma Future 8 Ultimate",
     brand: "Puma",
     category: "boots", subcategory: "CONTROL BOOTS", productType: "Control / Agility boots",
     price: 20000, oldPrice: 25000, discount: 20, sizes: ["EU 40","EU 41","EU 42","EU 43","EU 44"],
-    surface: ["FG","AG"], level: "ELITE", playerProfile: "Dribbling / Agility",
+    surface: ["FG"], level: "ELITE", playerProfile: "Dribbling / Agility",
     material: "Сетчатый верх", weight: "230 г", fit: "Адаптивная",
     upper: "FUZIONFIT адаптивная посадка", soleplate: "RUBCAGE + Dynamic Motion", generation: "2026",
     description: "Создана для дриблинга: эластичная зона на бинтах даёт свободу и контроль. Идеальна для техничных игроков, обыгрывающих один в один.",
-    image: "🪄", isNew: true, stock: 11, collection: "agility"
+    images: ["assets/img/boots/future8-1.webp","assets/img/boots/future8-2.avif","assets/img/boots/future8-3.avif","assets/img/boots/future8-4.jpg"],
+    isNew: true, stock: 11, collection: "agility"
   },
   {
-    id: "nike-tiempo-legend-10",
+    id: "nike-tiempo-legend",
     name: "Nike Tiempo Legend 10 Elite",
     brand: "Nike",
     category: "boots", subcategory: "CONTROL BOOTS", productType: "Control boots",
     price: 20000, oldPrice: 25000, discount: 20, sizes: ["EU 39","EU 40","EU 40.5","EU 41","EU 42","EU 42.5","EU 43","EU 44","EU 45"],
-    surface: ["FG","AG"], level: "ELITE", playerProfile: "Control / Passing",
+    surface: ["FG"], level: "ELITE", playerProfile: "Control / Passing",
     material: "Kangaroo FlyTouch", weight: "235 г", fit: "Комфортная",
     upper: "Кожа Kangaroo FlyTouch с эффектом перчатки", soleplate: "Hyperstability", generation: "2026",
-    description: "Легендарная серия для премьер-классной техники: мягкий кожаный верх с эффектом перчатки даёт идеальный контроль мяча и точность передачи. Выбор плеймейкеров и защитников.",
+    description: "Легендарная серия для премьер-классной техники: мягкий кожаный верх с эффектом перчатки даёт идеальный контроль мяча и точность передачи.",
     image: "🧤", isNew: true, bestseller: true, stock: 13, collection: "control"
   },
 
-  /* ─────────────────── БУТСЫ · AG СОРОКОНОЖКИ · 24 000 ₸ ─────────────── */
+  /* ═══════════════════════ БУТСЫ · TF · TURF 2026 ═══════════════════════ */
   {
-    id: "nike-merc-vapor-ag",
-    name: "Nike Mercurial Vapor 17 AG (сороконожка)",
+    id: "nike-merc-vapor16-tf",
+    name: "Nike Mercurial Vapor 16 TF",
     brand: "Nike",
-    category: "boots", subcategory: "SPEED BOOTS AG", productType: "Speed boots AG",
-    price: 20000, oldPrice: 25000, discount: 20, sizes: ["EU 40","EU 40.5","EU 41","EU 42","EU 42.5","EU 43","EU 44"],
-    surface: ["AG"], level: "ELITE", playerProfile: "Speed / Attack",
+    category: "boots", subcategory: "TURF BOOTS", productType: "Turf boots",
+    price: 20000, oldPrice: 25000, discount: 20, sizes: ["EU 39","EU 40","EU 40.5","EU 41","EU 42","EU 42.5","EU 43","EU 44","EU 45"],
+    surface: ["TF"], level: "ELITE", playerProfile: "Speed / Attack",
     material: "Flyknit", weight: "190 г", fit: "Тесная / гоночная",
-    upper: "Vaporposite сетчатый верх", soleplate: "AG-маленькие шипы", generation: "2026",
-    description: "Сороконожка Mercurial для искусственного газона: множество мелких шипов для устойчивости и скорости на AG.",
-    image: "⚡", isNew: true, stock: 14, collection: "speed"
+    upper: "Vaporposite сетчатый верх", soleplate: "TF-многочисленные шипы", generation: "2026",
+    description: "Turf-версия Mercurial Vapor 16 для искусственных покрытий. Мелкие шипы дают устойчивость и мгновенное ускорение на коротком ворсе.",
+    images: ["assets/img/boots/tf/vapor16tf-1.jpg","assets/img/boots/tf/vapor16tf-2.jpg","assets/img/boots/tf/vapor16tf-3.jpg","assets/img/boots/tf/vapor16tf-4.jpg","assets/img/boots/tf/vapor16tf-5.webp","assets/img/boots/tf/vapor16tf-6.png"],
+    isNew: true, stock: 14, collection: "speed"
   },
   {
-    id: "nike-merc-superfly-ag",
-    name: "Nike Mercurial Superfly 11 AG (сороконожка)",
+    id: "nike-merc-superfly10-tf",
+    name: "Nike Mercurial Superfly 10 TF",
     brand: "Nike",
-    category: "boots", subcategory: "SPEED BOOTS AG", productType: "Speed boots AG",
+    category: "boots", subcategory: "TURF BOOTS", productType: "Turf boots",
     price: 20000, oldPrice: 25000, discount: 20, sizes: ["EU 39","EU 40","EU 41","EU 42","EU 43","EU 44"],
-    surface: ["AG"], level: "ELITE", playerProfile: "Speed / Attack",
+    surface: ["TF"], level: "ELITE", playerProfile: "Speed / Attack",
     material: "Flyknit высокая посадка", weight: "228 г", fit: "Фиксация с голеностопом",
-    upper: "Vaporposite 3.0", soleplate: "AG-маленькие шипы", generation: "2026",
-    description: "Сороконожка Superfly для искусственного газона: мелкие многочисленные шипы дают отличное сцепление и фиксацию.",
-    image: "🚀", isNew: true, stock: 10, collection: "speed"
+    upper: "Vaporposite 3.0", soleplate: "TF-многочисленные шипы", generation: "2026",
+    description: "Turf-версия Superfly 10 с высокой посадкой для искусственных покрытий. Многочисленные шипы и фиксация голеностопа для максимальной скорости.",
+    images: ["assets/img/boots/tf/superfly10tf-1.webp","assets/img/boots/tf/superfly10tf-2.jpg","assets/img/boots/tf/superfly10tf-3.jpg","assets/img/boots/tf/superfly10tf-4.webp","assets/img/boots/tf/superfly10tf-5.webp"],
+    isNew: true, stock: 10, collection: "speed"
   },
   {
-    id: "adidas-f50-ag",
-    name: "adidas F50 Hyperfast AG (сороконожка)",
+    id: "adidas-f50-tf",
+    name: "Adidas F50 TF",
     brand: "adidas",
-    category: "boots", subcategory: "SPEED BOOTS AG", productType: "Speed boots AG",
+    category: "boots", subcategory: "TURF BOOTS", productType: "Turf boots",
     price: 20000, oldPrice: 25000, discount: 20, sizes: ["EU 39","EU 40","EU 41","EU 42","EU 43","EU 44"],
-    surface: ["AG"], level: "ELITE", playerProfile: "Speed / Acceleration",
+    surface: ["TF"], level: "ELITE", playerProfile: "Speed / Acceleration",
     material: "Сетка с покрытием", weight: "208 г", fit: "Средняя",
-    upper: "HybridTouch", soleplate: "AG-маленькие шипы", generation: "2026",
-    description: "Сороконожка F50 для искусственного газона: мелкие шипы снижают ударную нагрузку и дают стабильность на AG.",
-    image: "🏃", stock: 17, collection: "speed"
+    upper: "HybridTouch", soleplate: "TF-многочисленные шипы", generation: "2026",
+    description: "Turf-версия F50 для искусственных покрытий. Мелкие шипы и лёгкий верх дают ускорение и контроль на коротком ворсе.",
+    images: ["assets/img/boots/tf/f50tf-1.jpg","assets/img/boots/tf/f50tf-2.webp","assets/img/boots/tf/f50tf-3.webp","assets/img/boots/tf/f50tf-4.jpg","assets/img/boots/tf/f50tf-5.webp"],
+    stock: 17, collection: "speed"
   },
   {
-    id: "puma-ultra-ag",
-    name: "Puma Ultra 6 Ultimate AG (сороконожка)",
-    brand: "Puma",
-    category: "boots", subcategory: "SPEED BOOTS AG", productType: "Speed boots AG",
-    price: 20000, oldPrice: 25000, discount: 20, sizes: ["EU 40","EU 41","EU 42","EU 43","EU 44"],
-    surface: ["AG"], level: "ELITE", playerProfile: "Speed / Lightweight",
-    material: "UTHC лёгкий верх", weight: "198 г", fit: "Тесная",
-    upper: "ULTRAWEAVE", soleplate: "AG-маленькие шипы", generation: "2026",
-    description: "Сороконожка Ultra для искусственного газона: лёгкий верх и мелкие многочисленные шипы для максимальной манёвренности.",
-    image: "💨", stock: 12, collection: "speed"
-  },
-  {
-    id: "nike-phantom-ag",
-    name: "Nike Phantom 6 Elite AG (сороконожка)",
+    id: "nike-phantom-gx3-tf",
+    name: "Nike Phantom GX 3 TF",
     brand: "Nike",
-    category: "boots", subcategory: "CONTROL BOOTS AG", productType: "Control boots AG",
-    price: 20000, oldPrice: 25000, discount: 20, sizes: ["EU 39","EU 40","EU 41","EU 42","EU 43","EU 44"],
-    surface: ["AG"], level: "ELITE", playerProfile: "Control / Passing / Finishing",
-    material: "Flyknit", weight: "243 г", fit: "Комфортная",
-    upper: "FlyTouch для приёма мяча", soleplate: "AG-маленькие шипы", generation: "2026",
-    description: "Сороконожка Phantom для искусственного газона: мелкие шипы и контрольный верх для плеймейкера на AG.",
-    image: "🎯", isNew: true, stock: 11, collection: "control"
+    category: "boots", subcategory: "TURF BOOTS", productType: "Turf boots",
+    price: 20000, oldPrice: 25000, discount: 20, sizes: ["EU 39","EU 40","EU 41","EU 42","EU 43","EU 44","EU 45"],
+    surface: ["TF"], level: "ELITE", playerProfile: "Control / Passing / Finishing",
+    material: "GripknitPro", weight: "233 г", fit: "Комфортная",
+    upper: "GripknitPro сухое сцепление", soleplate: "TF-многочисленные шипы", generation: "2026",
+    description: "Turf-версия Phantom GX 3 для искусственных покрытий. Контрольный верх и мелкие шипы для точного паса и удара на коротком ворсе.",
+    images: ["assets/img/boots/tf/phantomgx3tf-1.jpg","assets/img/boots/tf/phantomgx3tf-2.jpg","assets/img/boots/tf/phantomgx3tf-3.jpg","assets/img/boots/tf/phantomgx3tf-4.jpg"],
+    isNew: true, stock: 11, collection: "control"
   },
   {
-    id: "adidas-predator-ag",
-    name: "adidas Predator 26 AG (сороконожка)",
+    id: "adidas-predator25-tf",
+    name: "Adidas Predator 25 TF",
     brand: "adidas",
-    category: "boots", subcategory: "CONTROL BOOTS AG", productType: "Control boots AG",
+    category: "boots", subcategory: "TURF BOOTS", productType: "Turf boots",
     price: 20000, oldPrice: 25000, discount: 20, sizes: ["EU 40","EU 41","EU 42","EU 43","EU 44"],
-    surface: ["AG"], level: "ELITE", playerProfile: "Ball control / Finishing",
-    material: "Кожа HybridTouch", weight: "253 г", fit: "Комфортная",
-    upper: "HybridTouch с рифлением", soleplate: "AG-маленькие шипы", generation: "2026",
-    description: "Сороконожка Predator для искусственного газона: мелкие шипы и усиленные зоны удара на AG.",
-    image: "👑", stock: 16, collection: "control"
-  },
-  {
-    id: "puma-future-ag",
-    name: "Puma Future 9 Ultimate AG (сороконожка)",
-    brand: "Puma",
-    category: "boots", subcategory: "CONTROL BOOTS AG", productType: "Control / Agility boots AG",
-    price: 20000, oldPrice: 25000, discount: 20, sizes: ["EU 40","EU 41","EU 42","EU 43","EU 44"],
-    surface: ["AG"], level: "ELITE", playerProfile: "Dribbling / Agility",
-    material: "Сетчатый верх", weight: "233 г", fit: "Адаптивная",
-    upper: "FUZIONFIT адаптивная посадка", soleplate: "AG-маленькие шипы", generation: "2026",
-    description: "Сороконожка Future для искусственного газона: мелкие шипы и эластичная зона для обыгрыша один в один на AG.",
-    image: "🪄", stock: 13, collection: "agility"
-  },
-
-  /* ─────────────────── БУТСЫ · IC ФУТЗАЛКИ · 24 000 ₸ ────────────────── */
-  {
-    id: "nike-merc-vapor-ic",
-    name: "Nike Mercurial Vapor 17 IC (футзалки)",
-    brand: "Nike",
-    category: "boots", subcategory: "INDOR BOOTS IC", productType: "Indoor shoes",
-    price: 20000, oldPrice: 25000, discount: 20, sizes: ["EU 40","EU 40.5","EU 41","EU 42","EU 42.5","EU 43","EU 44"],
-    surface: ["IC"], level: "ELITE", playerProfile: "Indoor / Speed",
-    material: "Flyknit", weight: "200 г", fit: "Тесная",
-    upper: "Vaporposite", soleplate: "Плоская резина IC", generation: "2026",
-    description: "Футзалки Mercurial с плоской подошвой для индора и твёрдых покрытий. Чувство мяча и сцепление в зале.",
-    image: "🏟", isNew: true, stock: 13, collection: "speed"
-  },
-  {
-    id: "nike-merc-superfly-ic",
-    name: "Nike Mercurial Superfly 11 IC (футзалки)",
-    brand: "Nike",
-    category: "boots", subcategory: "INDOR BOOTS IC", productType: "Indoor shoes",
-    price: 20000, oldPrice: 25000, discount: 20, sizes: ["EU 39","EU 40","EU 41","EU 42","EU 43","EU 44"],
-    surface: ["IC"], level: "ELITE", playerProfile: "Indoor / Speed",
-    material: "Flyknit высокая посадка", weight: "230 г", fit: "Фиксация с голеностопом",
-    upper: "Vaporposite 3.0", soleplate: "Плоская резина IC", generation: "2026",
-    description: "Футзалки Superfly для индора: плоская подошва и высокая посадка для контроля в зале.",
-    image: "🚀", stock: 9, collection: "speed"
-  },
-  {
-    id: "adidas-f50-ic",
-    name: "adidas F50 Hyperfast IC (футзалки)",
-    brand: "adidas",
-    category: "boots", subcategory: "INDOR BOOTS IC", productType: "Indoor shoes",
-    price: 20000, oldPrice: 25000, discount: 20, sizes: ["EU 39","EU 40","EU 41","EU 42","EU 43","EU 44"],
-    surface: ["IC"], level: "ELITE", playerProfile: "Indoor / Speed",
-    material: "Сетка с покрытием", weight: "210 г", fit: "Средняя",
-    upper: "HybridTouch", soleplate: "Плоская резина IC", generation: "2026",
-    description: "Футзалки F50 с плоской подошвой для залов. Лёгкость и ускорение на твёрдом покрытии.",
-    image: "🏃", stock: 18, collection: "speed"
-  },
-  {
-    id: "puma-ultra-ic",
-    name: "Puma Ultra 6 Ultimate IC (футзалки)",
-    brand: "Puma",
-    category: "boots", subcategory: "INDOR BOOTS IC", productType: "Indoor shoes",
-    price: 20000, oldPrice: 25000, discount: 20, sizes: ["EU 40","EU 41","EU 42","EU 43","EU 44"],
-    surface: ["IC"], level: "ELITE", playerProfile: "Indoor / Lightweight",
-    material: "UTHC лёгкий верх", weight: "205 г", fit: "Тесная",
-    upper: "ULTRAWEAVE", soleplate: "Плоская резина IC", generation: "2026",
-    description: "Футзалки Ultra: ультралёгкий верх и плоская подошва для быстрой игры в зале.",
-    image: "💨", stock: 11, collection: "speed"
-  },
-  {
-    id: "nike-phantom-ic",
-    name: "Nike Phantom 6 Elite IC (футзалки)",
-    brand: "Nike",
-    category: "boots", subcategory: "INDOR BOOTS IC", productType: "Indoor shoes",
-    price: 20000, oldPrice: 25000, discount: 20, sizes: ["EU 39","EU 40","EU 41","EU 42","EU 43","EU 44"],
-    surface: ["IC"], level: "ELITE", playerProfile: "Indoor / Control",
-    material: "Flyknit", weight: "240 г", fit: "Комфортная",
-    upper: "FlyTouch для приёма мяча", soleplate: "Плоская резина IC", generation: "2026",
-    description: "Футзалки Phantom для индора: контрольный верх и плоская подошва для точного паса в зале.",
-    image: "🎯", isNew: true, stock: 10, collection: "control"
-  },
-  {
-    id: "adidas-predator-ic",
-    name: "adidas Predator 26 IC (футзалки)",
-    brand: "adidas",
-    category: "boots", subcategory: "INDOR BOOTS IC", productType: "Indoor shoes",
-    price: 20000, oldPrice: 25000, discount: 20, sizes: ["EU 40","EU 41","EU 42","EU 43","EU 44"],
-    surface: ["IC"], level: "ELITE", playerProfile: "Indoor / Finishing",
+    surface: ["TF"], level: "ELITE", playerProfile: "Ball control / Finishing",
     material: "Кожа HybridTouch", weight: "248 г", fit: "Комфортная",
-    upper: "HybridTouch с рифлением", soleplate: "Плоская резина IC", generation: "2026",
-    description: "Футзалки Predator с плоской подошвой для индора: усиленные зоны удара и сцепление в зале.",
-    image: "👑", stock: 15, collection: "control"
+    upper: "HybridTouch с рифлением", soleplate: "TF-многочисленные шипы", generation: "2026",
+    description: "Turf-версия Predator 25 для искусственных покрытий. Усиленные зоны удара и мелкие шипы для уверенного контроля мяча.",
+    images: ["assets/img/boots/tf/predator25tf-1.jpg","assets/img/boots/tf/predator25tf-2.jpg","assets/img/boots/tf/predator25tf-3.jpg","assets/img/boots/tf/predator25tf-4.jpeg"],
+    isNew: true, stock: 16, collection: "control"
   },
   {
-    id: "puma-future-ic",
-    name: "Puma Future 9 Ultimate IC (футзалки)",
+    id: "puma-future8-tf",
+    name: "Puma Future 8 TF",
     brand: "Puma",
-    category: "boots", subcategory: "INDOR BOOTS IC", productType: "Indoor / Agility shoes",
+    category: "boots", subcategory: "TURF BOOTS", productType: "Turf / Agility boots",
     price: 20000, oldPrice: 25000, discount: 20, sizes: ["EU 40","EU 41","EU 42","EU 43","EU 44"],
-    surface: ["IC"], level: "ELITE", playerProfile: "Indoor / Dribbling",
-    material: "Сетчатый верх", weight: "228 г", fit: "Адаптивная",
-    upper: "FUZIONFIT адаптивная посадка", soleplate: "Плоская резина IC", generation: "2026",
-    description: "Футзалки Future для индора: плоская подошва и адаптивная посадка для дриблинга в зале.",
-    image: "🪄", stock: 12, collection: "agility"
+    surface: ["TF"], level: "ELITE", playerProfile: "Dribbling / Agility",
+    material: "Сетчатый верх", weight: "233 г", fit: "Адаптивная",
+    upper: "FUZIONFIT адаптивная посадка", soleplate: "TF-многочисленные шипы", generation: "2026",
+    description: "Turf-версия Future 8 для искусственных покрытий. Эластичная зона для дриблинга и мелкие шипы для манёвренности на коротком ворсе.",
+    images: ["assets/img/boots/tf/future8tf-1.webp","assets/img/boots/tf/future8tf-2.webp","assets/img/boots/tf/future8tf-3.jpg","assets/img/boots/tf/future8tf-4.jpg"],
+    stock: 13, collection: "agility"
   },
 
   /* ─────────────────────────── ФОРМЫ · ПРЕМЬЕР-ЛИГА (топ-10) ───────────── */
