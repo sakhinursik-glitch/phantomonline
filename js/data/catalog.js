@@ -107,7 +107,7 @@ const DEFAULT_CATALOG = [
     material: "GripknitPro", weight: "230 г", fit: "Комфортная",
     upper: "GripknitPro сухое сцепление", soleplate: "Nike GX 3", generation: "2026",
     description: "Новое поколение плеймейкерских бутс Phantom. Рискованные пасы и выверенный приём даже на мокром газоне — зона контакта выросла, сцепление стало ещё надёжнее.",
-    images: ["assets/img/boots/phantomgx3-1.png","assets/img/boots/phantomgx3-2.webp","assets/img/boots/phantomgx3-3.webp"],
+    images: ["assets/img/boots/phantomgx3-3.webp","assets/img/boots/phantomgx3-2.webp","assets/img/boots/phantomgx3-1.png"],
     featured: true, isNew: true, stock: 11, collection: "control"
   },
   {
